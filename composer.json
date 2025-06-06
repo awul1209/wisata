@@ -1,0 +1,9 @@
+{
+    "name": "vendor/wisata",
+    "description": "projeck wisata",
+    "minimum-stability": "beta",
+    "prefer-stable": true,
+    "require": {
+        "phpoffice/phpspreadsheet": "^4.0"
+    }
+}

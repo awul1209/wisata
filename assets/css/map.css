@@ -1,0 +1,26 @@
+.kotak-map{
+    height: 60vh;
+    width: 70%;
+    border: 1px solid rgb(201, 198, 198);
+margin: auto;
+margin-bottom: 70px;
+}
+
+.map-kotak #judul-map{
+    text-align: center;
+}
+.map-kotak hr{
+    margin: auto;
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 420px) {
+    .kotak-map{
+        height: 60vh;
+        width: 90%;
+    }
+    .map-kotak #judul-map{
+        margin-top: 50px;
+    }
+  }

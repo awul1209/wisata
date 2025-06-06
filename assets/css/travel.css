@@ -1,0 +1,151 @@
+/* travel */
+/* search */
+.search {
+    width: 900px;
+    margin: auto;
+    margin-top: 100px;
+    /* border: 1px solid black; */
+  }
+  #kab-pc{
+    width: 250px;
+    /* display: none; */
+    /* margin-right: 3px; */
+  }
+  #kec-pc{
+    /* display: none; */
+    width: 250px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  .cari{
+    width: 550px;
+    /* margin-left: 25px; */
+  }
+  /* end search */
+  .kotak-travel {
+    width: 79%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    /* border: 1px solid black; */
+  }
+  .kotak-travel .card {
+    transition: 0.3s;
+    width: 15rem;
+  }
+  #h2{
+    margin-top: 10px;
+  }
+  /* end travel */
+
+  /* css detail */
+#detail-travel {
+  margin: auto;
+  margin-top: 100px;
+  /* display: flex; */
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 70px;
+  /* border: 1px solid black; */
+}
+
+#detail-travel .kotak-peta {
+  display: none;
+  margin-top: 20px;
+  height: 500px;
+  /* flex: 1; */
+  box-sizing: border-box;
+  padding: 0px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+/* #detail-travel .kotak-peta .h6 {
+  background-color: #eaeaea;
+  padding: 8px;
+} */
+/* #detail-travel .kotak-peta #map-canvas {
+  width: 98%;
+  height: 430px;
+  margin: auto;
+} */
+
+#detail-travel .kotak-des {
+  width: 60%;
+  padding: 0px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  height: auto;
+  /* border: 1px solid black; */
+  /* flex: 2; */
+  margin-bottom: 100px;
+  margin: auto;
+}
+#detail-travel .kotak-des .h6 {
+  background-color: #eaeaea;
+  padding: 8px;
+}
+/* end css detail */
+
+  @media (max-width: 420px) {
+    /* css detail */
+  #detail-travel {
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 225px;
+    padding: 0px;
+  }
+  #detail-travel .kotak-des{
+    width: 110%;
+  }
+  /* end css detail */
+  
+    /* css wisata */
+    .kotak-travel {
+      width: 100%;
+      flex-direction: row;
+      padding: 1px;
+      gap: 3px;
+      /* border: 1px solid black; */
+    }
+    .kotak-travel .card {
+      width: 48%;
+      margin-bottom: 5px;
+      margin-top: 2px;
+    }
+    .kotak-travel .card .btn{
+      padding: 1px;
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+    .kotak-travel .card h5{
+      font-size: 15px;
+    }
+    .search {
+      margin-top: 70px;
+      width: 330px;
+      /* border: 1px solid black; */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 4px;
+    }
+    #kab-pc{
+      width: 325px;
+    }
+    #kec-pc{
+      /* display: none; */
+      width: 325px;
+    }
+    .cari{
+      width: 325px;
+      /* margin-left: 25px; */
+    }
+    #cari{
+      margin-top: 10px;
+    }
+  
+
+  }
+  

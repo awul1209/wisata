@@ -1,0 +1,68 @@
+.kotak-dashboard{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 65px;
+}
+.kotak-dashboard .card-content h5{
+    font-size: 16px;
+    }
+.kotak-dashboard .card-content p{
+    font-size: 14px;
+    }
+.kotak-dashboard .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+}
+
+.kotak-dashboard .card-image {
+    margin-top: 20px;
+}
+
+.kotak-dashboard .card-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+.kotak-dashboard .card-content {
+    padding: 20px;
+}
+
+.kotak-dashboard .card-title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.kotak-dashboard .card-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.kotak-dashboard .card-btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.kotak-dashboard .card-btn:hover {
+    background-color: #0056b3;
+}
+@media (max-width: 420px) {
+    .kotak-dashboard{
+        height: 75vh;
+    }
+}

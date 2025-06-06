@@ -1,0 +1,588 @@
+/* kotak home konten */
+#carouselExampleAutoplaying{
+  margin-top: 60px;
+}
+.carousel-item{
+  height: 92vh;
+}
+/* end kotak home konten */
+
+/* destination kategori */
+.top-destination{
+  /* border: 1px solid black; */
+  width: 100%;
+  height: auto;
+  margin-bottom: 75px;
+}
+.top-destination hr{
+  margin: 0px;
+  width: 20%;
+}
+.top-destination .judul-destination{
+  /* border: 1px solid black; */
+  text-align: center;
+}
+.top-destination .judul-destination .judul-kategori{
+font-size: 22px;
+  margin-top: 5px;
+  display: none;
+}
+.top-destination .judul-destination h2{
+font-size: 22px;
+  margin-top: 5px;
+}
+.top-destination .kotak-destination{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.top-destination .kotak-destination .card{
+  width: 15rem;
+  margin-top: 2px;
+  transition: 0.3s;
+  /* border: none; */
+}
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* kategori */
+.kategori-container {
+  margin-top: 5px;
+  display: flex;
+  overflow-x: auto; /* Membuat kategori dapat digeser secara horizontal */
+  padding: 10px 10px; /* Menambahkan padding atas dan bawah */
+  -webkit-overflow-scrolling: touch; /* Agar lebih mulus di perangkat mobile */
+  justify-content: center;
+}
+
+
+.kategori-btn {
+  background-color: transparent; /* Warna tombol */
+  border: none;
+  color: white;
+  padding: 3px 20px;
+  margin-right: 10px; /* Memberikan jarak antar tombol */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  border: 1px solid rgb(107, 97, 97);
+  border-radius: 25px; /* Membuat tombol memiliki sudut melengkung */
+}
+
+.kategori-container::-webkit-scrollbar {
+  height: 8px; /* Ukuran scrollbar */
+}
+
+.kategori-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Warna scrollbar */
+  border-radius: 5px;
+}
+
+.kategori-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+/* kategori */
+/* end destination */
+
+/* css detail */
+#detail {
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 70px;
+  /* border: 1px solid black; */
+}
+#detail .kotak-petunjuk {
+  /* margin-top: 20px; */
+  height: 700px;
+  /* border: 1px solid black; */
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+#detail .kotak-petunjuk .h6 {
+  background-color: #eaeaea;
+  padding: 8px;
+}
+#detail .kotak-petunjuk .table tr th,td{
+  font-size: 14px;
+}
+
+#detail .kotak-peta {
+  /* margin-top: 20px; */
+  height: 500px;
+  /* border: 1px solid black; */
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+#detail .kotak-peta .h6 {
+  background-color: #eaeaea;
+  padding: 8px;
+}
+#detail .kotak-peta #map-canvas {
+  width: 98%;
+  height: 430px;
+  margin: auto;
+}
+/* #detail .kotak-des {
+  padding: 0px;
+  margin-top: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  height: 500px;
+  /* border: 1px solid black; 
+  flex: 1;
+} */
+/* #detail .kotak-des .h6 {
+  background-color: #eaeaea;
+  padding: 8px;
+} */
+
+#judul-map{
+  font-size: 24px;
+}
+
+/* galeri */
+.kotak-galeri{
+  margin: auto;
+  /* border: 1px solid black; */
+  height: 300px;
+  width: 60%;
+  margin-bottom: 150px;
+}
+
+.kotak-galeri .slider img {
+  width: 100%;
+  border-radius: 10px;
+  height: 250px;
+}
+.kotak-galeri h2{
+  margin-bottom: 40px;
+  text-align: center;
+}
+/* end galeri */
+
+/* komentar */
+.kotak-komentar{
+  /* border: 1px solid black; */
+  width: 71%;
+  margin: auto;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  /* background-color: #f4f4f4; */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 100px;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.kotak-komentar textarea {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    border-radius: 15px;
+    padding: 5px;
+    height: 140px;
+}
+
+.kotak-komentar button {
+  width: 20%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #0092DC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.kotak-komentar button:hover {
+    background-color: 564be6;
+}
+
+.kotak-komentar .comments {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.kotak-komentar .comment-box {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.isi-komentar{
+  width: 80%;
+  margin: auto;
+  margin-top: 5px;
+  border: 1px solid rgb(212, 212, 212);
+  /* height: 20px; */
+  /* display: flex; */
+  /* gap: 25px; */
+  padding: 10px 10px;
+  border-radius: 10px;
+  /* justify-content: space-between; */
+}
+.isi-komentar .kotak-profil{
+  gap: 10px;
+  /* border: 1px solid black; */
+  display: flex;
+}
+.isi-komentar .kotak-profil .img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* border: 1px solid rgb(29, 28, 28); */
+  overflow: hidden;
+}
+.isi-komentar .kotak-profil .img .logo{
+  width: 100%;
+  height: 100%;
+}
+.isi-komentar .kotak-profil .text{
+width: 90%;
+}
+.isi-komentar .kotak-profil .text p{
+  margin: 0px 3px;
+  font-size: 14px;
+  text-align: justify;
+}
+.isi-komentar .kotak-profil .text p.title{
+font-weight: bold;
+margin-bottom: 3px;
+}
+.isi-komentar .kotak-profil .text p.tgl{
+  font-size: 12px;
+margin-top: 3px;
+}
+.isi-komentar .kotak-btn{
+  /* border: 1px solid black; */
+padding: 4px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.isi-komentar .kotak-btn .btn-view{
+padding: 3px 7px;
+font-size: 13px;
+}
+/* end komentar */
+/* end css detail */
+
+
+
+/* wisata */
+/* search */
+.search {
+  width: 900px;
+  margin: auto;
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+#kab-pc{
+  width: 250px;
+  /* display: none; */
+  /* margin-right: 3px; */
+}
+#kec-pc{
+  /* display: none; */
+  width: 250px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.cari{
+  width: 350px;
+  /* margin-left: 25px; */
+}
+/* end search */
+
+.kotak-wisata {
+  width: 79%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 17px;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  /* border: 1px solid black; */
+}
+.kotak-wisata .card {
+  width: 16rem;
+  transition: 0.3s;
+}
+#h2{
+  font-size: 24px;
+  margin-top: 10px;
+  width: 150px;
+  padding-bottom: 7px;
+  border-bottom: 3px solid rgb(238, 238, 238);
+}
+/* end wisata */
+
+/* footer */
+.footer{
+  background-color: rgb(20, 20, 20);
+  height: 10px;
+}
+.footer p{
+  color: aliceblue;
+}
+/* end footer */
+
+@media (max-width: 420px) {
+  /* kotak home konten */
+.carousel-item{
+  height: auto;
+}
+/* end kotak home konten */
+  /* css detail */
+  #detail {
+    flex-direction: column;
+    margin-top: 70px;
+  }
+  /* end css detail */
+
+  /* galeri */
+.kotak-galeri{
+  width: 90vw;
+  margin-bottom: 10px;
+}
+.kotak-galeri .slider img {
+  width: 100%;
+  border-radius: 10px;
+  height: 150px;
+}
+.kotak-galeri h2{
+  margin-bottom: 20px;
+}
+/* end galeri */
+
+/* d\komentar */
+/* komentar */
+.kotak-komentar{
+  /* border: 1px solid black; */
+  width: 100%;
+  margin: auto;
+  /* background-color: #f4f4f4; */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 100px;
+  border-radius: 15px;
+  padding: 15px 5px;
+}
+.kotak-komentar textarea {
+  width: 97%;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  border-radius: 5px;
+  padding: 5px;
+  height: 150px;
+}
+
+.isi-komentar{
+  width: 99%;
+  margin: auto;
+  margin-top: 5px;
+  border: 1px solid rgb(212, 212, 212);
+  /* height: 20px; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* gap: 5px; */
+  padding: 5px 5px;
+  border-radius: 10px;
+  height: auto;
+}
+.isi-komentar .kotak-profil{
+  gap: 5px;
+  /* border: 1px solid black; */
+  display: flex;
+}
+.isi-komentar .kotak-profil .img{
+  width: 10%;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid rgb(29, 28, 28);
+  /* overflow: hidden; */
+  text-align: center;
+}
+.isi-komentar .kotak-profil .img img.logo{
+width: 100%;
+height: 100%;
+}
+.isi-komentar .kotak-profil .text{
+  line-height: 14px;
+  width: 90%;
+  /* border: 1px solid rgb(29, 28, 28); */
+  padding-bottom: 0px;
+}
+.isi-komentar .kotak-profil .text p{
+  margin: 0px 0px;
+  margin-left: 3px;
+font-size: 12px;
+}
+.isi-komentar .kotak-profil .text p.title{
+  font-weight: bold;
+  margin-bottom: 3px;
+  }
+  .isi-komentar .kotak-profil .text p.tgl{
+    font-size: 11px;
+  margin-top: 3px;
+  }
+
+/* .isi-komentar .kotak-btn{
+  margin-top: -10px;
+padding: 0px;
+display: flex;
+} */
+/* .isi-komentar .kotak-btn .btn-view {
+  font-size: 13px;
+  padding: 2px 8px ;
+} */
+/* d\komentar */
+
+
+#h2{
+  /* margin-top: 50px; */
+  /* font-size: 20px; */
+  border-bottom: 1px solid rgb(179, 177, 177);
+  width: 100px;
+}
+#judul-map{
+  font-size: 20px;
+}
+  /* css wisata */
+  .kotak-wisata {
+    /* border-top: 1px solid black; */
+    width: 100%;
+    flex-direction: row;
+    padding: 1px;
+    gap: 3px;
+    margin-top: 12px;
+    /* border: 1px solid black; */
+  }
+  .kotak-wisata .card {
+    width: 46%;
+    margin-bottom: 5px;
+
+  }
+
+  .kotak-wisata .card h5{
+    font-size: 15px;
+  }
+  .kotak-wisata .card p{
+    font-size: 14px;
+  }
+  .kotak-wisata .card .btn{
+    padding: 1px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .search {
+    margin-top: 70px;
+    width: 330px;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+  }
+  #kab-pc{
+    margin-top: 20px;
+    width: 325px;
+  }
+  #kec-pc{
+    margin-top: 15px;
+    /* display: none; */
+    width: 325px;
+    margin-bottom: 5px;
+  }
+  .cari{
+    width: 325px;
+    /* margin-left: 25px; */
+  }
+
+  /* pganation */
+  /* #kotak-pagination{
+    border: 1px solid black;
+    margin: auto;
+  } */
+  /* end wisata */
+
+  /* destination */
+  .top-destination{
+    height: auto;
+    margin-bottom: 25px;
+  }
+  .top-destination .kotak-destination{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  padding: 1px;
+  margin-top: 10px;
+  gap: 3px;
+  }
+  .top-destination .kotak-destination .card{
+    width: 46%;
+  }
+  .kotak-destination .card h5{
+    font-size: 16px;
+  }
+  .kotak-destination .card p{
+    font-size: 14px;
+  }
+  .kotak-destination .card a{
+    font-size: 14px;
+    padding: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .top-destination h2{
+    font-size: 20px;
+  }
+  /* kategori */
+.kategori-container {
+justify-content:start ;
+margin-bottom: 20px;
+}
+.top-destination hr{
+  width: 40%;
+}
+.kategori-btn {
+  padding: 7px 17px;
+  border-radius: 25px; /* Membuat tombol memiliki sudut melengkung */
+}
+/* end kategori */
+  /* end destination */
+
+  /* footer */
+  .footer{
+    padding: 5px;
+    background-color: rgb(20, 20, 20);
+    height: 5px;
+  }
+  .footer p{
+    font-size: 14px;
+  }
+  /* end footer */
+}

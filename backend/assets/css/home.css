@@ -1,0 +1,87 @@
+/* dashboard */
+.kotak-seller{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    gap: 3px;
+    /* border: 1px solid black; */
+    margin-top: 20px;
+
+}
+.kotak-seller .card-seller{
+    /* border: 1px solid black; */
+    
+    width: 33%;
+}
+.kotak-seller .card-seller h3,p{
+    color: #004072;
+}
+.kotak-seller .card-seller h3{
+    font-size: 26px;
+}
+.kotak-seller .card-seller p{
+    font-size: 16px;
+}
+
+/* end-dashboard */
+
+
+
+.kotak-chart{
+    margin-top: 30px;
+    /* border: 1px solid black; */
+    display: flex;
+    gap: 20px;
+}
+.kotak-chart .pengunjung{
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 2px #b8b8b8, -1px -1px 2px #ececec;
+    display: flex;
+    justify-content: center;
+    max-height: 280px;
+    flex: 2;
+}
+.kotak-chart .kategori{
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 2px #b8b8b8, -1px -1px 2px #ececec;
+    display: flex;
+    justify-content: center;
+   
+    max-height: 280px;
+    flex: 1;
+}
+
+@media only screen and (max-width: 480px) {
+    .kotak-seller{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+        gap: 15px;
+    }
+    .kotak-seller .card-seller{
+        width: 90%;
+    }
+
+
+
+    .kotak-chart{
+        /* border: 1px solid black; */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .kotak-chart .pengunjung{
+        padding: 3px;
+    }
+    .kotak-chart .kategori{
+        padding: 5px;
+        margin: auto;
+        margin-top: 10px;
+        max-height: 210px;
+        flex: 1;
+    }
+    }
