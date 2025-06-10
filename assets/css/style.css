@@ -104,7 +104,7 @@ font-size: 22px;
 }
 #detail .kotak-petunjuk {
   /* margin-top: 20px; */
-  height: 700px;
+  height: 770px;
   /* border: 1px solid black; */
   flex: 1;
   box-sizing: border-box;
@@ -121,7 +121,7 @@ font-size: 22px;
 
 #detail .kotak-peta {
   /* margin-top: 20px; */
-  height: 500px;
+  height: 770px;
   /* border: 1px solid black; */
   flex: 1;
   box-sizing: border-box;
@@ -159,15 +159,19 @@ font-size: 22px;
   margin: auto;
   /* border: 1px solid black; */
   height: 300px;
-  width: 60%;
+  width: 90%;
   margin-bottom: 150px;
 }
-
-.kotak-galeri .slider img {
-  width: 100%;
-  border-radius: 10px;
-  height: 250px;
-}
+        /* Beri sedikit jarak antar gambar */
+        .kotak-galeri .slider .slide-item {
+            padding: 0 10px; /* Jarak 10px di kiri dan kanan setiap slide */
+        }
+        .kotak-galeri .slider img {
+            width: 100%;
+            height: 250px; /* Pertimbangkan menggunakan aspect-ratio agar gambar tidak terdistorsi */
+            object-fit: cover; /* Membuat gambar mengisi kotak tanpa gepeng */
+            border-radius: 10px;
+        }
 .kotak-galeri h2{
   margin-bottom: 40px;
   text-align: center;

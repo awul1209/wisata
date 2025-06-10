@@ -179,52 +179,64 @@ $produkk=mysqli_fetch_assoc($produk);
             scales: {
                 y: {
                     min: 0,
-                    max: 160
+                    max: 200
                 }
             }
         }
     });
 </script>
 
+<?php
+// 1. Buat satu kueri SQL yang efisien untuk mengambil semua data kategori
+$sql = "SELECT kategori, COUNT(*) as jumlah FROM wisata GROUP BY kategori ORDER BY kategori ASC";
+$result = mysqli_query($koneksi, $sql);
+
+// 2. Siapkan array kosong untuk menampung label dan data chart
+$chart_labels = [];
+$chart_data = [];
+
+// 3. Looping hasil kueri dan masukkan ke dalam array
+while ($row = mysqli_fetch_assoc($result)) {
+    $chart_labels[] = $row['kategori'];
+    $chart_data[] = $row['jumlah'];
+}
+?>
+
 <script>
-    // let tahunSekarang = new Date().getFullYear();
-    const kategori = document.getElementById('kategori');
-    new Chart(kategori, {
-        type: 'doughnut',
-        data: {
-            labels: ['Alama', 'Bermain', 'Edukasi', 'Religi'],
-            datasets: [{
-                label: '',
-                data: [<?php 
-                        $sql1 = mysqli_query($koneksi, "SELECT kategori FROM wisata WHERE kategori = 'Alama' ");
-                        echo mysqli_num_rows($sql1);
-                        ?>,
-                    <?php
-                    $sql2 = mysqli_query($koneksi, "SELECT kategori FROM wisata WHERE kategori = 'Bermain' ");
-                    echo mysqli_num_rows($sql2);
-                    ?>,
-                    <?php
-                    $sql3 = mysqli_query($koneksi, "SELECT kategori FROM wisata WHERE kategori = 'Edukasi' ");
-                    echo mysqli_num_rows($sql3);
-                    ?>,
-                    <?php
-                    $sql4 = mysqli_query($koneksi, "SELECT kategori FROM wisata WHERE kategori = 'Religi' ");
-                    echo mysqli_num_rows($sql4);
-                    ?>,
-                ],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)'
-                ],
-            }]
-        },
-        options: {
-            scales: {
+const kategori = document.getElementById('kategori');
+new Chart(kategori, {
+    type: 'doughnut',
+    data: {
+        // 4. Gunakan data dari PHP yang sudah di-encode ke format JSON
+        labels: <?php echo json_encode($chart_labels); ?>,
+        datasets: [{
+            label: 'Jumlah Wisata per Kategori',
+            data: <?php echo json_encode($chart_data); ?>,
+            backgroundColor: [ // Sediakan lebih banyak warna untuk kategori dinamis
+                'rgb(255, 99, 132)',  // Merah
+                'rgb(54, 162, 235)', // Biru
+                'rgb(255, 205, 86)', // Kuning
+                'rgb(75, 192, 192)',  // Hijau Tosca
+                'rgb(153, 102, 255)', // Ungu
+                'rgb(255, 159, 64)',  // Oranye
+                'rgb(46, 204, 113)',  // Hijau Terang
+                'rgb(231, 76, 60)'    // Merah Bata
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Jumlah Wisata Berdasarkan Kategori'
             }
         }
-        
-    });
+    }
+});
 </script>
 

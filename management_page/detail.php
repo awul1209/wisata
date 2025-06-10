@@ -33,6 +33,12 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 
 <style>
+     .scrollable-content {
+        padding: 5px;
+        text-align: justify;
+        max-height: 200px;
+        overflow-y: auto;
+    }
     #route-instructions {
         max-height: 200px;
         overflow-y: auto;
@@ -51,7 +57,7 @@
 </style>
 
 <div class="kotak-petunjuk">
-    <h6 class="h6 text-center">Petunjuk Peta</h6>
+    <h6 class="h6 text-center">Deskripsi</h6>
      <table class="table">
             <tr>
                 <th>Item</th>
@@ -75,25 +81,36 @@
                     <h6 class="text-justify"><?php echo $harga_tiket; ?></h6>
                 </td>
             </tr>
-            <tr>
-                <td rowspan="2" colspan="2">Deskripsi <br> <?= $deskripsi; ?></td>
-            </tr>
-            <tr></tr>
+
+
 
             <tr>
-                <td colspan="2" style="display: none;">
+                <td colspan="2">
+                    <img src="./assets/images/wisata/<?=  $gambar1;  ?>" alt="" width="100%" style="max-height:300px">
+                </td>
+  
+                <!-- <td colspan="2" style="display: none;">
                     <center>
                     <div class="btn" style="background-color:#004072;"><a href="?page=rute&id=<?= $row['id']; ?>" class="text-decoration-none text-white">Rute</a></div>
                     </center>
-                </td>
+                </td> -->
+            </tr>
+            <tr id="trscroll">
+                  <td rowspan="2" colspan="2">
+        <div class="scrollable-content">
+            <?= $deskripsi; ?>
+        </div>
+    </td>
             </tr>
         </table>
-    <div id="route-instructions" style="padding: 10px; font-size: 14px; max-height: 400px; overflow-y: auto;"></div>
+
+
 </div>
 
 <div class="kotak-peta">
     <h6 class="h6 text-center">Peta</h6>
-    <div class="text-center" id="map-canvas" style="height: 400px;"></div>
+    <div class="text-center" id="map-canvas" style="height: 300px;"></div>
+        <div id="route-instructions" style="padding: 10px; font-size: 14px; max-height: 400px; overflow-y: auto;"></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -168,7 +185,7 @@
                 output += `<p><strong>Estimasi waktu:</strong> ${waktuTempuh}</p><ol>`;
 
                 route.instructions.forEach(function(step) {
-                    let text = step.text.replace("Turn left", "Belok kiri").replace("Turn right", "Belok kanan").replace("Continue straight", "Lurus terus").replace("Continue", "Lanjutkan").replace("Destination", "Tujuan").replace("at the roundabout", "di bundaran").replace("Take the", "Ambil").replace("exit", "jalan keluar").replace(" to stay on", " untuk tetap di").replace("onto", "menuju").replace("Head", "Menuju").replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.").replace("Exit the traffic circle", "Keluar dari bundaran lalu lintas").replace("Enter the traffic circle and take the 1st", "Masuk ke bundaran lalu ambil jalan pertama.").replace("west on", "ke barat").replace("east", "timur").replace("west", "barat").replace("northeast", "timur laut").replace("southwest ", "barat daya").replace("north", "utara").replace("south", "selatan ").replace("northtimur", "timur laut ");
+                    let text = step.text.replace("Turn left", "Belok kiri").replace("Turn right", "Belok kanan").replace("Continue straight", "Lurus terus").replace("Continue", "Lanjutkan").replace("Destination", "Tujuan").replace("at the roundabout", "di bundaran").replace("Take the", "Ambil").replace("exit", "jalan keluar").replace(" to stay on", " untuk tetap di").replace("onto", "menuju").replace("Head", "Menuju").replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.").replace("Exit the traffic circle", "Keluar dari bundaran lalu lintas").replace("Enter the traffic circle and take the 1st", "Masuk ke bundaran lalu ambil jalan pertama.").replace("west on", "ke barat").replace("east", "timur").replace("west", "barat").replace("northeast", "timur laut").replace("southwest ", "barat daya").replace("north", "utara").replace("south", "selatan ").replace("northtimur", "timur laut ").replace("You have arrived at your destination, on the left", "Anda telah tiba di tujuan Anda, di sebelah kiri.").replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.");;
                     let distance = Math.round(step.distance);
                     output += `<li>${getIcon(text)} ${text} <span class="text-muted">(${distance} m)</span></li>`;
                 });
@@ -220,28 +237,30 @@
 </div>
 
 <div class="kotak-galeri">
-<h2>Galeri</h2>
+    <h2>Galeri</h2>
     <div class="slider">
-        <?php $result = mysqli_query($koneksi, "SELECT * FROM wisata WHERE id='$id'");
+        <?php
+        // Asumsi variabel $koneksi dan $id sudah ada dari file utama Anda
 
-        // Menyimpan  per gambar
-        $gambar='';
-
-        // Mengambil rating per gambar dari setiap data
-        foreach ($result as $row) {
-        for ($i = 1; $i <= 4; $i++) {
-        // simpan data ke variabel gambar
-             $gambar = $row['gambar' . $i]; 
-             if($gambar == ''){
-
-             } else{ ?>
-                <div><img src="./assets/images/wisata/<?=  $gambar;  ?>" alt="Gambar"></div>
-               <?php } ?>
-            
-
-      <?php  } 
-    
-    }  ?>
+        // 2. Struktur PHP yang lebih sederhana dan aman
+        $result = mysqli_query($koneksi, "SELECT * FROM wisata WHERE id='$id'");
+        
+        // Cukup ambil satu baris data karena kita query berdasarkan id unik
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Looping untuk setiap kolom gambar (gambar1, gambar2, dst.)
+            for ($i = 1; $i <= 4; $i++) {
+                $gambar = $row['gambar' . $i];
+                // Hanya tampilkan jika nama filenya tidak kosong
+                if (!empty($gambar)) {
+        ?>
+                    <div class="slide-item">
+                        <img src="./assets/images/wisata/<?= htmlspecialchars($gambar); ?>" alt="Galeri Wisata <?= $i; ?>">
+                    </div>
+        <?php
+                }
+            }
+        }
+        ?>
     </div>
 </div>
 
@@ -297,7 +316,7 @@ while($row = mysqli_fetch_assoc($kome)){
                 dots: true,
                 infinite: true,
                 speed: 500,
-                slidesToShow: 2,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 adaptiveHeight: true,
                 autoplay: true,

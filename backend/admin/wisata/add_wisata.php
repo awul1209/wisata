@@ -36,7 +36,7 @@
               <label for="kategori" class="col-form-label">Kategori</label>
               <select class="form-select" name="kategori" aria-label="Default select example">
                 <option selected>Pilih</option>
-                <option value="ALama">ALam</option>
+                <option value="ALama">Alam</option>
                 <option value="Bermain">Bermain</option>
                 <option value="Edukasi">Edukasi</option>
                 <option value="Religi">Religi</option>
@@ -47,6 +47,7 @@
               </select>
             </div>
 </div>
+
 
 <div class="kotak-form-user col-12">
 <div class="mb-2 kotak-input-user">
@@ -77,11 +78,25 @@
               <input class="form-control" name="gambar3" id="gambar3-tambah" type="file" id="formFileMultiple" multiple onchange="previewImageTambah3()">
               <img class="foto-preview-tambah3" src="" alt="" width="80">
             </div>
+
+</div>
+<div class="kotak-form-user col-12">
             <div class="mb-2 kotak-input-user">
               <label for="gambar4-tambah" class="col-form-label">Gambar 4:</label>
               <input class="form-control" name="gambar4" id="gambar4-tambah" type="file" id="formFileMultiple" multiple onchange="previewImageTambah4()">
               <img class="foto-preview-tambah4" src="" alt="" width="80">
             </div>
+            <div class="mb-2 kotak-input-user">
+              <label for="gambar5-tambah" class="col-form-label">Gambar 5:</label>
+              <input class="form-control" name="gambar5" id="gambar5-tambah" type="file" id="formFileMultiple" multiple onchange="previewImageTambah5()">
+              <img class="foto-preview-tambah5" src="" alt="" width="80">
+            </div>
+            <div class="mb-2 kotak-input-user">
+              <label for="gambar6-tambah" class="col-form-label">Gambar 6:</label>
+              <input class="form-control" name="gambar6" id="gambar6-tambah" type="file" id="formFileMultiple" multiple onchange="previewImageTambah6()">
+              <img class="foto-preview-tambah6" src="" alt="" width="80">
+            </div>
+
 </div>
        
 
@@ -155,6 +170,30 @@
       imgPreview.src = oFREvent.target.result;
     }
   }
+     function previewImageTambah5() {
+    const image = document.querySelector('#gambar5-tambah');
+    const imgPreview = document.querySelector('.foto-preview-tambah5');
+    imgPreview.style.display = 'block';
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
+     function previewImageTambah6() {
+    const image = document.querySelector('#gambar6-tambah');
+    const imgPreview = document.querySelector('.foto-preview-tambah6');
+    imgPreview.style.display = 'block';
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
 </script>
 
 
@@ -175,10 +214,12 @@ if (isset($_POST['simpan'])) {
     $gambar2 = ($_FILES['gambar2']['error'] === 4) ? NULL : upload2();
     $gambar3 = ($_FILES['gambar3']['error'] === 4) ? NULL : upload3();
     $gambar4 = ($_FILES['gambar4']['error'] === 4) ? NULL : upload4();
+    $gambar5 = ($_FILES['gambar5']['error'] === 4) ? NULL : upload5();
+    $gambar6 = ($_FILES['gambar6']['error'] === 4) ? NULL : upload6();
 
     // Query untuk insert data ke tabel
-    $query = "INSERT INTO wisata (nama_wisata, operasional, harga_tiket, deskripsi, kec, latlng, status, kategori, gambar, gambar1, gambar2, gambar3) 
-              VALUES ('$nama', '$operasional', '$tiket', '$deskripsi', '$kec', '$latlng', '$status', '$kategori', '$gambar1', '$gambar2', '$gambar3', '$gambar4')";
+    $query = "INSERT INTO wisata (nama_wisata, operasional, harga_tiket, deskripsi, kec, latlng, status, kategori, gambar, gambar1, gambar2, gambar3,gambar4,gambar5) 
+              VALUES ('$nama', '$operasional', '$tiket', '$deskripsi', '$kec', '$latlng', '$status', '$kategori', '$gambar1', '$gambar2', '$gambar3', '$gambar4', '$gambar5', '$gambar6')";
 
     $simpan = mysqli_query($koneksi, $query);
     if ($simpan) {
@@ -363,6 +404,112 @@ function upload4()
     $ukuranfile = $_FILES['gambar4']['size'];
     $error = $_FILES['gambar4']['error'];
     $tmpname = $_FILES['gambar4']['tmp_name'];
+
+    // cek gambar tidak diupload
+    if ($error === 4) {
+        echo "
+        <script>
+        alert('pilih gambar');
+        </script>
+        
+        ";
+        return false;
+    }
+    // cek yang di uplod gambar atau tidak
+    $ektensigambarvalid = ['jpg', 'jpeg', 'png', 'webp','jfif'];
+
+    $ektensigambar = explode('.', $namafile);
+    $ektensigambar = strtolower(end($ektensigambar));
+    // cek adakah string didalam array
+    if (!in_array($ektensigambar, $ektensigambarvalid)) {
+        echo "
+        <script>
+        alert('yang anda upload bukan gambar');
+        </script>
+        ";
+
+        return false;
+    }
+    // cek jika ukuran terlalu besar
+    if ($ukuranfile > 90000000) {
+        echo "
+        <script>
+        alert('ukuran gambar terlalu besar');
+        </script>
+        
+        ";
+        return false;
+    }
+
+    // lolos pengecekan , gambar siap di upload
+    // generete nama gambar baru
+    $namafilebaru = uniqid();
+    $namafilebaru .= '.';
+    $namafilebaru .= $ektensigambar;
+
+    move_uploaded_file($tmpname, '../assets/images/wisata/' . $namafilebaru);
+
+    return $namafilebaru;
+}
+function upload5()
+{
+    $namafile = $_FILES['gambar5']['name'];
+    $ukuranfile = $_FILES['gambar5']['size'];
+    $error = $_FILES['gambar5']['error'];
+    $tmpname = $_FILES['gambar5']['tmp_name'];
+
+    // cek gambar tidak diupload
+    if ($error === 4) {
+        echo "
+        <script>
+        alert('pilih gambar');
+        </script>
+        
+        ";
+        return false;
+    }
+    // cek yang di uplod gambar atau tidak
+    $ektensigambarvalid = ['jpg', 'jpeg', 'png', 'webp','jfif'];
+
+    $ektensigambar = explode('.', $namafile);
+    $ektensigambar = strtolower(end($ektensigambar));
+    // cek adakah string didalam array
+    if (!in_array($ektensigambar, $ektensigambarvalid)) {
+        echo "
+        <script>
+        alert('yang anda upload bukan gambar');
+        </script>
+        ";
+
+        return false;
+    }
+    // cek jika ukuran terlalu besar
+    if ($ukuranfile > 90000000) {
+        echo "
+        <script>
+        alert('ukuran gambar terlalu besar');
+        </script>
+        
+        ";
+        return false;
+    }
+
+    // lolos pengecekan , gambar siap di upload
+    // generete nama gambar baru
+    $namafilebaru = uniqid();
+    $namafilebaru .= '.';
+    $namafilebaru .= $ektensigambar;
+
+    move_uploaded_file($tmpname, '../assets/images/wisata/' . $namafilebaru);
+
+    return $namafilebaru;
+}
+function upload6()
+{
+    $namafile = $_FILES['gambar6']['name'];
+    $ukuranfile = $_FILES['gambar6']['size'];
+    $error = $_FILES['gambar6']['error'];
+    $tmpname = $_FILES['gambar6']['tmp_name'];
 
     // cek gambar tidak diupload
     if ($error === 4) {
