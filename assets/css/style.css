@@ -95,7 +95,7 @@ font-size: 22px;
 /* css detail */
 #detail {
   margin: auto;
-  margin-top: 50px;
+  margin-top: 80px;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;

@@ -81,6 +81,7 @@
                     <h6 class="text-justify"><?php echo $harga_tiket; ?></h6>
                 </td>
             </tr>
+   
 
 
 
@@ -89,18 +90,21 @@
                     <img src="./assets/images/wisata/<?=  $gambar1;  ?>" alt="" width="100%" style="max-height:300px">
                 </td>
   
-                <!-- <td colspan="2" style="display: none;">
-                    <center>
-                    <div class="btn" style="background-color:#004072;"><a href="?page=rute&id=<?= $row['id']; ?>" class="text-decoration-none text-white">Rute</a></div>
-                    </center>
-                </td> -->
             </tr>
+           
             <tr id="trscroll">
                   <td rowspan="2" colspan="2">
         <div class="scrollable-content">
             <?= $deskripsi; ?>
         </div>
     </td>
+            </tr>
+                      <tr>
+                 <td colspan="2" style="display: none;">
+                    <center>
+                    <div class="btn" style="background-color:#004072;"><a href="?page=rute&id=<?= $row['id']; ?>" class="text-decoration-none text-white">Rute</a></div>
+                    </center>
+                </td>
             </tr>
         </table>
 
@@ -111,6 +115,8 @@
     <h6 class="h6 text-center">Peta</h6>
     <div class="text-center" id="map-canvas" style="height: 300px;"></div>
         <div id="route-instructions" style="padding: 10px; font-size: 14px; max-height: 400px; overflow-y: auto;"></div>
+        
+               
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
