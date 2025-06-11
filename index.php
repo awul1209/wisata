@@ -57,6 +57,7 @@ $page = $_GET['page'];
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+   
     <script src="assets/js/alert.js"></script>
 <!-- 
      <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" /> -->
@@ -151,6 +152,7 @@ $page = $_GET['page'];
       </div>
     </div>
   </div> 
+   <script src="assets/js/lrm-graphhopper.js"></script>
   <!-- end modal login -->
 
 

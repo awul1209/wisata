@@ -27,10 +27,15 @@
 
 
 <div class="row col-11" id="detail">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Leaflet core -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Leaflet Routing Machine -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+
+
 
 <style>
      .scrollable-content {
@@ -40,7 +45,7 @@
         overflow-y: auto;
     }
     #route-instructions {
-        max-height: 200px;
+        max-height: 350px;
         overflow-y: auto;
         padding-right: 10px;
     }
@@ -113,14 +118,21 @@
 
 <div class="kotak-peta">
     <h6 class="h6 text-center">Peta</h6>
-    <div class="text-center" id="map-canvas" style="height: 300px;"></div>
-        <div id="route-instructions" style="padding: 10px; font-size: 14px; max-height: 400px; overflow-y: auto;"></div>
+    <div class="text-center" id="map-canvas" style="height: 350px;"></div>
+        <div id="route-instructions" style="padding: 10px; font-size: 14px; overflow-y: auto;"></div>
         
                
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
+
+<!-- CORS helper (WAJIB untuk OpenRouteService) -->
+<script src="https://unpkg.com/corslite@0.0.7/corslite.js"></script>
+
+<!-- OpenRouteService Router Plugin -->
+<script src="https://unpkg.com/@gegeweb/leaflet-routing-machine-openroute@latest/dist/leaflet-routing-openroute.min.js"></script>
+
 
 <script>
     var lat = <?php echo $latlngArr[0]; ?>;
@@ -142,98 +154,113 @@
         })
     }).addTo(map).bindPopup("<b><?php echo $titles; ?></b><br>Operasional: <?php echo $operasional; ?>");
 
-    // --- AWAL DARI MODIFIKASI ---
-
-    // Variabel untuk menyimpan rute kontrol dan marker titik awal
     let routingControl = null;
     let startMarker = null;
+    const instructionDiv = document.getElementById('route-instructions');
 
-    // Fungsi untuk membuat atau memperbarui rute
-    function createOrUpdateRoute(startLatLng) {
-        // Hapus marker awal yang lama jika ada
-        if (startMarker) {
-            map.removeLayer(startMarker);
-        }
-
-        // Buat marker baru untuk titik awal, dan buat agar bisa digeser
-        startMarker = L.marker(startLatLng, { draggable: true }).addTo(map)
-            .bindPopup("<b>Lokasi Awal</b>").openPopup();
-
-        // Tambahkan event listener jika marker selesai digeser
-        startMarker.on('dragend', function(e) {
-            // Perbarui rute dari posisi marker yang baru
-            createOrUpdateRoute(e.target.getLatLng());
-        });
-
-        // Buat routing control jika belum ada
-        if (!routingControl) {
-            routingControl = L.Routing.control({
-                waypoints: [startLatLng, wisataLatLng],
-                createMarker: () => null, // Kita gunakan marker custom (startMarker)
-                addWaypoints: false,
-                draggableWaypoints: false,
-                routeWhileDragging: false,
-                show: false, // Sembunyikan panel instruksi di peta
-                lineOptions: {
-                    styles: [{ color: 'red', opacity: 1, weight: 4 }]
-                }
-            }).addTo(map);
-
-            // Event listener ini akan otomatis memperbarui petunjuk di kotak kiri
-            routingControl.on('routesfound', function(e) {
-                var route = e.routes[0];
-                var totalDistanceKm = (route.summary.totalDistance / 1000).toFixed(2);
-                var totalDurationMin = Math.round(route.summary.totalTime / 60);
-                var jam = Math.floor(totalDurationMin / 60);
-                var menit = totalDurationMin % 60;
-                var waktuTempuh = jam > 0 ? `${jam} jam ${menit} menit` : `${menit} menit`;
-                var output = `<p style="display:inline"><strong>Total jarak:</strong> ${totalDistanceKm} km</p>`;
-                output += `<p><strong>Estimasi waktu:</strong> ${waktuTempuh}</p><ol>`;
-
-                route.instructions.forEach(function(step) {
-                    let text = step.text.replace("Turn left", "Belok kiri").replace("Turn right", "Belok kanan").replace("Continue straight", "Lurus terus").replace("Continue", "Lanjutkan").replace("Destination", "Tujuan").replace("at the roundabout", "di bundaran").replace("Take the", "Ambil").replace("exit", "jalan keluar").replace(" to stay on", " untuk tetap di").replace("onto", "menuju").replace("Head", "Menuju").replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.").replace("Exit the traffic circle", "Keluar dari bundaran lalu lintas").replace("Enter the traffic circle and take the 1st", "Masuk ke bundaran lalu ambil jalan pertama.").replace("west on", "ke barat").replace("east", "timur").replace("west", "barat").replace("northeast", "timur laut").replace("southwest ", "barat daya").replace("north", "utara").replace("south", "selatan ").replace("northtimur", "timur laut ").replace("You have arrived at your destination, on the left", "Anda telah tiba di tujuan Anda, di sebelah kiri.").replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.");;
-                    let distance = Math.round(step.distance);
-                    output += `<li>${getIcon(text)} ${text} <span class="text-muted">(${distance} m)</span></li>`;
-                });
-
-                output += "</ol>";
-                document.getElementById('route-instructions').innerHTML = output;
-            });
-        } else {
-            // Jika routing control sudah ada, cukup perbarui titik awalnya
-            routingControl.setWaypoints([startLatLng, wisataLatLng]);
-        }
-    }
-
-    // Fungsi untuk icon arah (tidak berubah)
     function getIcon(text) {
         if (text.includes("kiri")) return '<i class="fa fa-arrow-left"></i>';
         if (text.includes("kanan")) return '<i class="fa fa-arrow-right"></i>';
-        if (text.includes("lurus") || text.includes("lanjutkan")) return '<i class="fa fa-arrow-up"></i>';
+        if (text.includes("lurus") || text.includes("Lanjutkan")) return '<i class="fa fa-arrow-up"></i>';
         if (text.includes("bundaran")) return '<i class="fa fa-sync-alt"></i>';
-        if (text.includes("tujuan")) return '<i class="fa fa-flag-checkered"></i>';
+        if (text.includes("Tujuan")) return '<i class="fa fa-flag-checkered"></i>';
         return '<i class="fa fa-arrow-right"></i>';
     }
 
-    // 1. Coba dapatkan lokasi pengguna saat pertama kali memuat halaman
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
-        createOrUpdateRoute(userLatLng);
-    }, function() {
-        // Jika gagal, tampilkan pesan agar pengguna mengklik peta
-        document.getElementById('route-instructions').innerHTML = "<p class='text-info'>Gagal mendapatkan lokasi Anda. <br><b>Silakan klik di peta untuk menentukan lokasi awal.</b></p>";
-    });
+    function createOrUpdateRoute(startLatLng) {
+        if (startMarker) {
+            map.removeLayer(startMarker);
+        }
+        startMarker = L.marker(startLatLng, { draggable: true }).addTo(map)
+            .bindPopup("<b>Lokasi Awal</b>").openPopup();
+        startMarker.on('dragend', (e) => createOrUpdateRoute(e.target.getLatLng()));
 
-    // 2. Tambahkan event listener untuk klik pada peta
-    map.on('click', function(e) {
-        createOrUpdateRoute(e.latlng);
-    });
+        instructionDiv.innerHTML = "<p class='text-info'>Mencari rute (via Openrouteservice)...</p>";
 
-    // --- AKHIR DARI MODIFIKASI ---
+        if (routingControl) {
+            map.removeControl(routingControl);
+        }
+
+        // Gunakan API Key Anda
+        var orsApiKey = '5b3ce3597851110001cf6248e62069013df5487da389ad987962b5ce';
+
+        routingControl = L.Routing.control({
+            waypoints: [startLatLng, wisataLatLng],
+            router: new L.Routing.OpenRouteService(orsApiKey, {
+                profile: "driving-car"
+            }),
+            createMarker: () => null,
+            addWaypoints: false,
+            draggableWaypoints: false,
+            show: false,
+            lineOptions: {
+                styles: [{ color: '#fd7e14', opacity: 0.8, weight: 6 }]
+            }
+        })
+        .on('routesfound', function (e) {
+            var route = e.routes[0];
+            var totalTime = route.summary.totalTime;
+            var totalDistanceKm = (route.summary.totalDistance / 1000).toFixed(2);
+            var jam = Math.floor(totalTime / 3600);
+            var menit = Math.floor((totalTime % 3600) / 60);
+            var waktuTempuh = jam > 0 ? `${jam} jam ${menit} menit` : `${menit} menit`;
+
+            var output = `<p><strong>Total jarak:</strong> ${totalDistanceKm} km</p>`;
+            output += `<p><strong>Estimasi waktu (Mobil):</strong> ${waktuTempuh}</p><hr/>`;
+
+            if (route.instructions && route.instructions.length > 0) {
+                output += `<strong>Petunjuk Arah:</strong><ol>`;
+                route.instructions.forEach(function (step) {
+                if (step.text) {
+                    let distance = Math.round(step.distance);
+                    let text = step.text
+                    .replace("Turn left", "Belok kiri")
+                    .replace("Turn right", "Belok kanan")
+                    .replace("Continue straight", "Lurus terus")
+                    .replace("Continue", "Lanjutkan")
+                    .replace("Destination", "Tujuan")
+                    .replace("at the roundabout", "di bundaran")
+                    .replace("Take the", "Ambil")
+                    .replace("exit", "jalan keluar")
+                    .replace(" to stay on", " untuk tetap di")
+                    .replace("onto", "menuju")
+                    .replace("Head", "Menuju")
+                    .replace("You have arrived at your destination, on the right", "Anda telah tiba di tujuan Anda, di sebelah kanan.")
+                    .replace("You have arrived at your destination, on the left", "Anda telah tiba di tujuan Anda, di sebelah kiri.")
+                    .replace("Exit the traffic circle", "Keluar dari bundaran")
+                    .replace("Enter the traffic circle and take the 1st", "Masuk ke bundaran lalu ambil jalan pertama")
+                    .replace("west on", "ke barat")
+                    .replace("east", "timur")
+                    .replace("west", "barat")
+                    .replace("northeast", "timur laut")
+                    .replace("southwest", "barat daya")
+                    .replace("north", "utara")
+                    .replace("Lanjutkanz", "Lanjutkan")
+                    .replace("Lanjutkanz tout droit sur Jalan Kusuma Bangsa", "Lanjutkan lurus di Jalan Kusuma Bangsa")
+                    .replace("Tournez à gauche sur Jalan Kusuma Bangsa", "Belok kiri ke Jalan Kusuma Bangsa")
+                    .replace("Démarrez en direction de l’Ouest sur Jalan BKR Pelajar", "Mulai menuju ke barat di Jalan BKR Pelajar.")
+                    .replace("south", "selatan ");
+                output += `<li>${getIcon(text)} ${text} (${distance} m)</li>`;
+                    }
+                });
+                output += `</ol>`;
+            }
+            instructionDiv.innerHTML = output;
+        })
+        .on('routingerror', function (e) {
+            instructionDiv.innerHTML = "<p class='text-danger'><b>Rute Tidak Ditemukan.</b><br>Layanan Openrouteservice gagal atau rute tidak ada.</p>";
+            console.error("Routing Error dari Openrouteservice:", e);
+        })
+        .addTo(map);
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => createOrUpdateRoute(L.latLng(position.coords.latitude, position.coords.longitude)),
+        () => instructionDiv.innerHTML = "<p class='text-info'>Gagal mendapatkan lokasi Anda. <br><b>Silakan klik di peta untuk menentukan lokasi awal.</b></p>"
+    );
+
+    map.on('click', (e) => createOrUpdateRoute(e.latlng));
 </script>
-
-
-
 
 
 
