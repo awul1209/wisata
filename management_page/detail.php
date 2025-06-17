@@ -1,3 +1,5 @@
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+
 <?php
         $id = $_GET['id'];
         $result = mysqli_query($koneksi, "SELECT * FROM wisata WHERE id='$id'");
@@ -59,6 +61,27 @@
     .leaflet-routing-container.leaflet-control {
         display: none !important;
     }
+
+ /* --- Styling untuk Thumbnail Gambar di Komentar --- */
+/* --- Styling untuk Thumbnail Gambar di Komentar --- */
+
+/* Container untuk galeri gambar di bawah komentar */
+.kotak-gambar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.gambar-komentar-item {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
 </style>
 
 <div class="kotak-petunjuk">
@@ -239,6 +262,26 @@
                     .replace("Lanjutkanz tout droit sur Jalan Kusuma Bangsa", "Lanjutkan lurus di Jalan Kusuma Bangsa")
                     .replace("Tournez à gauche sur Jalan Kusuma Bangsa", "Belok kiri ke Jalan Kusuma Bangsa")
                     .replace("Démarrez en direction de l’Ouest sur Jalan BKR Pelajar", "Mulai menuju ke barat di Jalan BKR Pelajar.")
+                     .replace("Démarrez en direction de l’Est", "Berangkat ke arah timur ")
+                     .replace("Tournez à gauche", "Belok kiri")
+                     .replace("Tournez à droite", "Belok kanan")
+                     .replace("Tournez à droite", "Belok ke kriri")
+                     .replace("Tournez franchement à gauche", "Belok ke kriri")
+                     .replace("tout droit", "Lurus ke depan")
+                     .replace("Démarrez en direction du Sud", "Berangkat ke arah selatan")
+                     .replace("ournez légerement à gauche", "Belok Sedikit ke kiri")
+                     .replace("Entrez di le rond-point et prenez la 2ème sortie sur", "Masuk ke bundaran dan ambil exit kedua di")
+                     .replace("Arrivé à votre destination, di la droite", "Setelah tiba di tujuan Anda, belok kanan")
+                     .replace("Arrivé à votre destination, di la droite", "Setelah tiba di tujuan Anda, belok kanan")
+                     .replace("Tournez légerement à gauche di Jalan Jokotole, 21", "Belok sedikit ke kiri di Jalan Jokotole, 21")
+                     .replace("Entrez di le rond-point et prenez la 2ème sortie sur Jalan Jokotole, 21", "Masuk ke bundaran dan ambil exit kedua di Jalan Jokotole, 21")
+                     .replace("Entrez di le rond-point et prenez la 2ème sortie sur Jalan Trunojoyo, 21", "Masuk ke bundaran dan ambil exit kedua di Jalan Trunojoyo, 21")
+                     .replace("Démarrez en direction du Nord", "Berangkat ke arah utara")
+                     .replace("Belok kanan sur Jalan Raya Gapura", "Belok kanan di Jalan Raya Gapura")
+                     .replace("sur", "di")
+                     .replace("Entrez di le rond-point et prenez la 1ère sortie", "Masuk ke bundaran dan ambil exit pertama")
+                     .replace("Arrivé à votre destination, di la gauche", "Ketika Anda tiba di tujuan, belok kiri")
+                     .replace("Arrivé à votre destination, sur la gauche", "Tujuan anda di sedelah kiri")
                     .replace("south", "selatan ");
                 output += `<li>${getIcon(text)} ${text} (${distance} m)</li>`;
                     }
@@ -300,7 +343,7 @@
 
     <div class="container kotak-komentar">
         <h2 class="mb-4">Berikan Komentar Anda</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         <div class="stars" id="stars_1">
         <div class="star" data-value="1" onclick="setRating(this, 1, 'rating_1')"></div>
         <div class="star" data-value="2" onclick="setRating(this, 2, 'rating_1')"></div>
@@ -310,38 +353,84 @@
     </div>
         <input type="hidden" name="rating_1" id="rating_1" required>
             <textarea class="text-area" name="comment" placeholder="Tulis komentar Anda..." required></textarea>
+            <center>
+                <input type="file" class="form-control file" name="gambar1">
+                <input type="file" class="form-control file" name="gambar2">
+            </center>
             <button type="submit" name="komen">Kirim</button>
         </form>
 
-        <?php
-        $kome = mysqli_query($koneksi, "SELECT user.id,user.nama, wisata.nama_wisata,komentar,komentar.created_at FROM `komentar` JOIN user ON komentar.user_id=user.id 
-JOIN wisata ON komentar.wisata_id=wisata.id WHERE wisata.id='$id'");
-while($row = mysqli_fetch_assoc($kome)){
-        ?>
-        <div class="isi-komentar">
-            <div class="kotak-profil">
-                <div class="img">
-                <img class="thumbnail logo" src="assets/images/icon_form/user.png">
-                </div>
-                <div class="text">
-                    <p class="title"><?= $row['nama'] ?></p>
-                    <p><?= $row['komentar'] ?></p>
-                    <p class="tgl"><?= $row['created_at'] ?></p>
-                </div>
-            </div>
-            <div class="kotak-btn">
-            <!-- <div class="btn-view btn text-white" data-bs-toggle="modal" data-bs-target="#view" style="background-color:#564be6;">View</div> -->
-            </div>
-        </div>
-    
-        <?php } ?>
+<?php
+// Ganti kueri ini dengan kueri Anda yang sudah ada
+// Pastikan ada `komentar.gambar` dan `komentar.gambar1`
+$kome = mysqli_query($koneksi, "SELECT user.id, user.nama, komentar.id as id_komentar, komentar.komentar, komentar.created_at, komentar.gambar, komentar.gambar1 
+    FROM `komentar` 
+    JOIN user ON komentar.user_id = user.id 
+    WHERE komentar.wisata_id = '$id' 
+    ORDER BY komentar.created_at ASC");
 
+// Loop untuk setiap baris komentar
+while ($row = mysqli_fetch_assoc($kome)) {
+?>
+
+  <div class="isi-komentar">
+    <div class="kotak-profil">
+        <div class="img">
+            <img class="thumbnail logo" src="assets/images/icon_form/user.png">
+        </div>
+        <div class="text">
+            <p class="title"><?= htmlspecialchars($row['nama']) ?></p>
+            <p><?= htmlspecialchars($row['komentar']) ?></p>
+            <p class="tgl"><?= date('d F Y, H:i', strtotime($row['created_at'])) ?></p>
+        </div>
+    </div>
+
+    <div class="kotak-gambar">
+        
+        <?php if (!empty($row['gambar'])): ?>
+            <?php $path_gambar1 = 'management_page/uploads/komentar/' . trim($row['gambar']); ?>
+            <a href="<?= $path_gambar1 ?>" 
+               class="link-ke-galeri" 
+               data-fancybox="galeri-semua-komentar"  
+               data-caption="<b><?= htmlspecialchars($row['nama']) ?>:</b><br><?= htmlspecialchars($row['komentar']) ?>">
+                
+                <img src="<?= $path_gambar1 ?>" alt="Gambar Komentar" class="gambar-komentar-item">
+            </a>
+        <?php endif; ?>
+
+        <?php if (!empty($row['gambar1'])): ?>
+            <?php $path_gambar2 = 'management_page/uploads/komentar/' . trim($row['gambar1']); ?>
+            <a href="<?= $path_gambar2 ?>" 
+               class="link-ke-galeri" 
+               data-fancybox="galeri-semua-komentar"
+               data-caption="<b><?= htmlspecialchars($row['nama']) ?>:</b><br><?= htmlspecialchars($row['komentar']) ?>">
+                
+                <img src="<?= $path_gambar2 ?>" alt="Gambar Komentar" class="gambar-komentar-item">
+            </a>
+        <?php endif; ?>
+
+        <?php // Tambahkan blok 'if' serupa jika ada lebih banyak gambar ?>
+
+    </div>
+</div>
+
+<?php 
+} // Akhir dari loop while
+?>
+        
     </div>
 
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
+<script>
+  Fancybox.bind("[data-fancybox]", {
+    // Opsi kustom jika diperlukan
+  });
+</script>
 
 <script>
         $(document).ready(function(){
@@ -404,16 +493,22 @@ if (isset($_POST['komen'])) {
         $id_komen = $roww['id'] ?? null;
 
         if (mysqli_num_rows($query) >= 1) {
+    $gambar1 = ($_FILES['gambar1']['error'] === 4) ? $row['gambar'] : upload1(); // Gunakan gambar lama jika tidak ada gambar baru
+    $gambar2 = ($_FILES['gambar2']['error'] === 4) ? $row['gambar1'] : upload2();
             // Jika sudah ada komentar, update
             $sql = "UPDATE komentar SET 
                     komentar = '" . mysqli_real_escape_string($koneksi, $komen) . "', 
-                    rating = '$rating' 
+                    rating = '$rating',
+                    gambar='$gambar1',
+                    gambar1='$gambar2'
                     WHERE id = '$id_komen'";
             $result = mysqli_query($koneksi, $sql);
         } else {
             // Jika belum ada komentar, insert baru
-            $sql = "INSERT INTO komentar (komentar, rating, user_id, wisata_id) 
-                    VALUES ('" . mysqli_real_escape_string($koneksi, $komen) . "', '$rating', '$s_id', '$id')";
+            $gambar1 = ($_FILES['gambar1']['error'] === 4) ? NULL : upload1();
+            $gambar2 = ($_FILES['gambar2']['error'] === 4) ? NULL : upload2();
+            $sql = "INSERT INTO komentar (komentar,gambar,gambar1, rating, user_id, wisata_id) 
+                    VALUES ('" . mysqli_real_escape_string($koneksi, $komen) . "','$gambar1','$gambar2', '$rating', '$s_id', '$id')";
             $result = mysqli_query($koneksi, $sql);
         }
 
@@ -435,5 +530,112 @@ if (isset($_POST['komen'])) {
             echo "Error: " . mysqli_error($koneksi);
         }
     }
+}
+
+function upload1()
+{
+    $namafile = $_FILES['gambar1']['name'];
+    $ukuranfile = $_FILES['gambar1']['size'];
+    $error = $_FILES['gambar1']['error'];
+    $tmpname = $_FILES['gambar1']['tmp_name'];
+
+    // cek gambar tidak diupload
+    if ($error === 4) {
+        echo "
+        <script>
+        alert('pilih gambar');
+        </script>
+        
+        ";
+        return false;
+    }
+    // cek yang di uplod gambar atau tidak
+    $ektensigambarvalid = ['jpg', 'jpeg', 'png', 'webp','jfif'];
+
+    $ektensigambar = explode('.', $namafile);
+    $ektensigambar = strtolower(end($ektensigambar));
+    // cek adakah string didalam array
+    if (!in_array($ektensigambar, $ektensigambarvalid)) {
+        echo "
+        <script>
+        alert('yang anda upload bukan gambar');
+        </script>
+        ";
+
+        return false;
+    }
+    // cek jika ukuran terlalu besar
+    if ($ukuranfile > 90000000) {
+        echo "
+        <script>
+        alert('ukuran gambar terlalu besar');
+        </script>
+        
+        ";
+        return false;
+    }
+
+    // lolos pengecekan , gambar siap di upload
+    // generete nama gambar baru
+    $namafilebaru = uniqid();
+    $namafilebaru .= '.';
+    $namafilebaru .= $ektensigambar;
+
+    move_uploaded_file($tmpname, 'management_page/uploads/komentar/' . $namafilebaru);
+
+    return $namafilebaru;
+}
+function upload2()
+{
+    $namafile = $_FILES['gambar2']['name'];
+    $ukuranfile = $_FILES['gambar2']['size'];
+    $error = $_FILES['gambar2']['error'];
+    $tmpname = $_FILES['gambar2']['tmp_name'];
+
+    // cek gambar tidak diupload
+    if ($error === 4) {
+        echo "
+        <script>
+        alert('pilih gambar');
+        </script>
+        
+        ";
+        return false;
+    }
+    // cek yang di uplod gambar atau tidak
+    $ektensigambarvalid = ['jpg', 'jpeg', 'png', 'webp','jfif'];
+
+    $ektensigambar = explode('.', $namafile);
+    $ektensigambar = strtolower(end($ektensigambar));
+    // cek adakah string didalam array
+    if (!in_array($ektensigambar, $ektensigambarvalid)) {
+        echo "
+        <script>
+        alert('yang anda upload bukan gambar');
+        </script>
+        ";
+
+        return false;
+    }
+    // cek jika ukuran terlalu besar
+    if ($ukuranfile > 90000000) {
+        echo "
+        <script>
+        alert('ukuran gambar terlalu besar');
+        </script>
+        
+        ";
+        return false;
+    }
+
+    // lolos pengecekan , gambar siap di upload
+    // generete nama gambar baru
+    $namafilebaru = uniqid();
+    $namafilebaru .= '.';
+    $namafilebaru .= $ektensigambar;
+
+    move_uploaded_file($tmpname, 'management_page/uploads/komentar/' . $namafilebaru);
+
+    return $namafilebaru;
 }
 ?>

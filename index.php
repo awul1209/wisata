@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 session_start();
-error_reporting(0);
+// error_reporting(0);
 if ($_SESSION['ses_nama'] != '') {
     $s_id = $_SESSION['ses_id'];
     $s_nama = $_SESSION['ses_nama'];
@@ -46,7 +46,8 @@ $page = $_GET['page'];
     <!-- slick -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-  
+  <!-- Fancybox CSS -->
+
     <!-- my css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/travel.css">
@@ -184,6 +185,8 @@ $page = $_GET['page'];
 
     <!-- slick -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 </body>
 
 </html>

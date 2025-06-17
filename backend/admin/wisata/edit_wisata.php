@@ -254,7 +254,6 @@ if (isset($_POST['simpan'])) {
     operasional='$operasional',
     harga_tiket='$tiket',
     deskripsi='$deskripsi',
-
     kec='$kec',
     latlng='$latlng',
     status='$status',
