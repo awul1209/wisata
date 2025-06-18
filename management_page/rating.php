@@ -162,24 +162,65 @@ $ulasan_total = buatUlasan(round($rata_rata_combined)); // Ulasan total berdasar
     </form>
 </div>
 
-<div class="komentar">
-        <h4>Komentar</h4>
-        <ul class="list-disc pl-5">
-    <?php  
-    $query_komen = mysqli_query($koneksi, "SELECT komentar FROM rating");  
+<div class="komentar my-5 mb-5">
+    <h4>Komentar & Rating</h4>
+    <hr>
+    
+    <?php
+    // --- QUERY DIPERBAIKI: Menambahkan `rating` dan diurutkan berdasarkan terbaru ---
+    $query_komen = mysqli_query($koneksi, "
+        SELECT 
+            user.nama, 
+            rating.komentar, 
+            rating.rating1,
+            rating.created_at 
+        FROM rating 
+        JOIN user ON rating.user_id = user.id
+        ORDER BY rating.created_at DESC
+    ");
 
-    if (mysqli_num_rows($query_komen) > 0) {  
-        while ($row = mysqli_fetch_assoc($query_komen)) { ?>  
-            <li style="list-style-type: none;" class="text-black text-start border-b" style="margin-bottom:-15px;">
-                <img src="./assets/images/icon_form/user.png" alt=""width="30px"><p  style="display: inline; margin-left: 5px;"><?= htmlspecialchars($row['komentar']) ?></p>
-            </li>  
-    <?php } 
-    } else { ?>  
-        <li class="text-gray-500 italic">Belum ada komentar.</li>  
-    <?php } ?>  
-</ul>
-
-    </div>
+    if (mysqli_num_rows($query_komen) > 0) {
+        while ($row = mysqli_fetch_assoc($query_komen)) {
+    ?>
+            <div class="d-flex align-items-start mb-4">
+                <div class="flex-shrink-0">
+                    <img src="./assets/images/icon_form/user.png" alt="user" class="rounded-circle" width="50px">
+                </div>
+                
+                <div class="ms-3 flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong class="mb-1"><?= htmlspecialchars($row['nama']) ?></strong>
+                        
+                        <div class="text-warning">
+                            <?php 
+                            $rating = (int)$row['rating1']; // Ambil nilai rating
+                            for ($i = 1; $i <= 5; $i++) {
+                                // Tampilkan bintang penuh jika $i <= nilai rating, jika tidak, tampilkan bintang kosong
+                                if ($i <= $rating) {
+                                    echo '<i class="fas fa-star"></i>'; // Ikon bintang penuh
+                                } else {
+                                    echo '<i class="far fa-star"></i>'; // Ikon bintang kosong
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    
+                    <small class="text-muted d-block mb-2">
+                        <?= date('d M Y, H:i', strtotime($row['created_at'])) ?>
+                    </small>
+                    
+                    <p class="mb-0">
+                        <?= nl2br(htmlspecialchars($row['komentar'])) ?>
+                    </p>
+                </div>
+            </div>
+            <hr class="my-3 d-md-none"> <?php 
+        } // Akhir while loop
+    } else { ?>
+        <p class="text-muted fst-italic">Belum ada komentar.</p>
+    <?php } ?>
+</div>
 
 <?php
 // Proses setelah tombol 'Nilai' diklik

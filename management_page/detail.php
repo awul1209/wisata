@@ -324,7 +324,7 @@
         // Cukup ambil satu baris data karena kita query berdasarkan id unik
         if ($row = mysqli_fetch_assoc($result)) {
             // Looping untuk setiap kolom gambar (gambar1, gambar2, dst.)
-            for ($i = 1; $i <= 4; $i++) {
+            for ($i = 1; $i <= 9; $i++) {
                 $gambar = $row['gambar' . $i];
                 // Hanya tampilkan jika nama filenya tidak kosong
                 if (!empty($gambar)) {
@@ -438,7 +438,7 @@ while ($row = mysqli_fetch_assoc($kome)) {
                 dots: true,
                 infinite: true,
                 speed: 500,
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 adaptiveHeight: true,
                 autoplay: true,

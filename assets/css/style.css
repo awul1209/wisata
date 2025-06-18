@@ -377,7 +377,8 @@ font-size: 13px;
 .kotak-galeri .slider img {
   width: 100%;
   border-radius: 10px;
-  height: 150px;
+  height: 80px;
+  /* border: 1px solid black; */
 }
 .kotak-galeri h2{
   margin-bottom: 20px;
