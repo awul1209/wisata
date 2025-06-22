@@ -20,6 +20,7 @@
                         <th>Email</th>
                         <th>Password</th>
                         <th>Level</th>
+                        <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -45,6 +46,9 @@
                             </td>
                             <td>
                                 <?php echo $data['level']; ?>
+                            </td>
+                            <td>
+                                <?php echo $data['Alamat']; ?>
                             </td>
 
                             <td>

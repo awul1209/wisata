@@ -14,8 +14,6 @@
         $gambar3 = $row['gambar3'];
         $gambar4 = $row['gambar4'];
         $gambar5 = $row['gambar5'];
-
-
         $title = "Detail dan Lokasi : " . $titles;
 
         // Pastikan latlng adalah format array atau decode jika berupa JSON string
@@ -43,11 +41,11 @@
      .scrollable-content {
         padding: 5px;
         text-align: justify;
-        max-height: 200px;
+        max-height: 300px;
         overflow-y: auto;
     }
     #route-instructions {
-        max-height: 350px;
+        max-height: 450px;
         overflow-y: auto;
         padding-right: 10px;
     }
@@ -136,6 +134,74 @@
             </tr>
         </table>
 
+<?php
+// ---- KODE REKOMENDASI TRAVEL DENGAN LAYOUT BARU ----
+// 1. Ambil nama 'kecamatan' dari tabel 'wisata'
+$stmt_wisata = mysqli_prepare($koneksi, "SELECT kec FROM wisata WHERE id = ?");
+// ... (kode untuk mengambil kecamatan tetap sama, tidak perlu diubah) ...
+mysqli_stmt_bind_param($stmt_wisata, "i", $id);
+mysqli_stmt_execute($stmt_wisata);
+$result_wisata = mysqli_stmt_get_result($stmt_wisata);
+$wisata_data = mysqli_fetch_assoc($result_wisata);
+mysqli_stmt_close($stmt_wisata);
+
+$rekomendasi_ditemukan = false;
+
+if ($wisata_data) {
+    $kecamatan_wisata = $wisata_data['kec'];
+
+    // 2. Cari travel yang cocok.
+    // PERUBAHAN DI SINI: Tambahkan 'id' ke dalam SELECT
+    $searchTerm = "%" . $kecamatan_wisata . "%";
+    $query_rekomendasi = "SELECT id, nama_travel, kontak FROM travel WHERE area_layanan LIKE ? LIMIT 4";
+    $stmt_rekomendasi = mysqli_prepare($koneksi, $query_rekomendasi);
+
+    if ($stmt_rekomendasi === false) {
+        die("ERROR: Gagal mempersiapkan kueri rekomendasi. Cek kueri Anda. Pesan dari MySQL: " . mysqli_error($koneksi));
+    }
+
+    mysqli_stmt_bind_param($stmt_rekomendasi, "s", $searchTerm);
+    mysqli_stmt_execute($stmt_rekomendasi);
+    $result_rekomendasi = mysqli_stmt_get_result($stmt_rekomendasi);
+
+    if (mysqli_num_rows($result_rekomendasi) > 0) {
+        $rekomendasi_ditemukan = true;
+    }
+}
+?>
+
+<div class="card mt-4">
+    <div class="card-header" style="background-color: #004072; color: #fff;">
+        <h5 class="card-title mb-0">Rekomendasi Travel di Area Ini</h5>
+    </div>
+    <div class="card-body">
+        <?php if ($rekomendasi_ditemukan) : ?>
+            <ul class="list-group list-group-flush">
+                <?php 
+                // 3. Tampilkan setiap travel yang ditemukan dengan layout baru
+                while ($travel = mysqli_fetch_assoc($result_rekomendasi)) : 
+                ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1"><?= htmlspecialchars($travel['nama_travel']) ?></h6>
+                            <small class="text-muted">Kontak: <?= htmlspecialchars($travel['kontak']) ?></small>
+                        </div>
+                        <div>
+                            <a href="?page=detail-travel&id=<?= $travel['id'] ?>" class="btn btn-sm btn-outline-primary">
+                                Detail
+                            </a>
+                        </div>
+                    </li>
+                    <?php 
+                endwhile; 
+                mysqli_stmt_close($stmt_rekomendasi);
+                ?>
+            </ul>
+        <?php else : ?>
+            <p class="text-muted mb-0">Saat ini belum ada rekomendasi travel untuk area ini.</p>
+        <?php endif; ?>
+    </div>
+</div>
 
 </div>
 
@@ -279,6 +345,10 @@
                      .replace("Démarrez en direction du Nord", "Berangkat ke arah utara")
                      .replace("Belok kanan sur Jalan Raya Gapura", "Belok kanan di Jalan Raya Gapura")
                      .replace("sur", "di")
+                     .replace("TBelok", "Belok")
+                     .replace("Entrez di le rond-point et prenez la 2ème sortie sur", "Masuk ke bundaran dan ambil exit kedua di")
+                     .replace("Entrez di le rond-point et prenez la 2ème sortie", "Masuk ke bundaran dan ambil exit kedua")
+                     .replace("Tournez franchement à droite", "belok kanan")
                      .replace("Entrez di le rond-point et prenez la 1ère sortie", "Masuk ke bundaran dan ambil exit pertama")
                      .replace("Arrivé à votre destination, di la gauche", "Ketika Anda tiba di tujuan, belok kiri")
                      .replace("Arrivé à votre destination, sur la gauche", "Tujuan anda di sedelah kiri")

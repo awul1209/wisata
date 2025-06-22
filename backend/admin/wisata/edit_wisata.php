@@ -42,7 +42,7 @@ $row=mysqli_fetch_assoc($result_tentang);
               <label for="kategori" class="col-form-label">Kategori</label>
               <select class="form-select" name="kategori" aria-label="Default select example">
                 <option selected value="<?= $row['kategori'] ?>"><?= $row['kategori'] ?></option>
-                <option value="ALama">ALam</option>
+                <option value="Alam">ALam</option>
                 <option value="Bermain">Bermain</option>
                 <option value="Edukasi">Edukasi</option>
                 <option value="Religi">Religi</option>
@@ -55,10 +55,35 @@ $row=mysqli_fetch_assoc($result_tentang);
               <label for="latlng" class="col-form-label">Latlng:</label>
               <input type="text" name="latlng" class="form-control" id="latlng" value="<?= $row['latlng'] ?>">
             </div>
+<?php
+// Data kecamatan di Kabupaten Sumenep, diurutkan berdasarkan abjad
+$kecamatan_sumenep = [
+    'Ambunten', 'Arjasa', 'Batang Batang', 'Batuan', 'Batuputih', 'Bluto', 'Dasuk', 
+    'Dungkek', 'Ganding', 'Gapura', 'Gayam', 'Giliginting', 'Guluk-Guluk', 'Kalianget', 
+    'Kangayan', 'Kota Sumenep', 'Lenteng', 'Manding', 'Masalembu', 'Nonggunong', 
+    'Pasongsongan', 'Pragaan', 'Raas', 'Rubaru', 'Sapeken', 'Saronggi', 'Talango'
+];
+sort($kecamatan_sumenep); // Memastikan urutannya sesuai abjad
+
+// Ambil nilai kecamatan yang sudah tersimpan dari database
+$kecamatan_tersimpan = $row['kec'];
+?>
+
 <div class="mb-2 kotak-input-user">
-              <label for="kec" class="col-form-label">Kec:</label>
-              <input type="text" name="kec" class="form-control" id="kec" value="<?= $row['kec'] ?>">
-            </div>
+    <label for="kec" class="col-form-label">Kecamatan:</label>
+    <select name="kec" id="kec" class="form-control" required>
+        <option value="" disabled>-- Pilih Kecamatan --</option>
+        <?php foreach ($kecamatan_sumenep as $kecamatan) : ?>
+            <?php
+                // Cek apakah kecamatan saat ini sama dengan yang tersimpan di database
+                $isSelected = ($kecamatan == $kecamatan_tersimpan) ? 'selected' : '';
+            ?>
+            <option value="<?= htmlspecialchars($kecamatan) ?>" <?= $isSelected ?> >
+                <?= htmlspecialchars($kecamatan) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
 
 </div>
 

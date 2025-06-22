@@ -32,11 +32,9 @@
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Travel</th>
-                    <!-- <th class="text-center">Rute</th>
-                    <th class="text-center">Tiket Per-Orang</th>
-                    <th class="text-center">Tiket Paket</th> -->
                     <th class="text-center">Kontak</th>
                     <th class="text-center">Deskripsi</th>
+                    <th class="text-center">Area Layanan</th>
                     <th class="text-center">Alamat</th>
                     <th class="text-center">Aksi</th>
                 </tr>
@@ -67,6 +65,9 @@
                         </td>
                         <td class="text-center">
                             <?php echo $data['deskripsi_travel']; ?>
+                        </td>
+                        <td class="text-center">
+                            <?= $data['area_layanan']; ?>
                         </td>
                         <td class="text-center">
                             <?= $data['alamat']; ?>

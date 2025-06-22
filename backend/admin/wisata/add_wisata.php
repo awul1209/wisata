@@ -1,3 +1,13 @@
+<?php
+// Data kecamatan di Kabupaten Sumenep, diurutkan berdasarkan abjad
+$kecamatan_sumenep = [
+    'Ambunten', 'Arjasa', 'Batang Batang', 'Batuan', 'Batuputih', 'Bluto', 'Dasuk', 
+    'Dungkek', 'Ganding', 'Gapura', 'Gayam', 'Giliginting', 'Guluk-Guluk', 'Kalianget', 
+    'Kangayan', 'Kota Sumenep', 'Lenteng', 'Manding', 'Masalembu', 'Nonggunong', 
+    'Pasongsongan', 'Pragaan', 'Raas', 'Rubaru', 'Sapeken', 'Saronggi', 'Talango'
+];
+sort($kecamatan_sumenep); // Memastikan urutannya sesuai abjad
+?>
 <div class="card card-info mt-3" id="card-add-user">
     <div class="card-header" style="background-color: #004072;">
         <h5 class="card-title" style="color: #fff;">
@@ -36,14 +46,10 @@
               <label for="kategori" class="col-form-label">Kategori</label>
               <select class="form-select" name="kategori" aria-label="Default select example">
                 <option selected>Pilih</option>
-                <option value="ALama">Alam</option>
+                <option value="ALam">Alam</option>
                 <option value="Bermain">Bermain</option>
                 <option value="Edukasi">Edukasi</option>
                 <option value="Religi">Religi</option>
-                <!-- <option value="Sunset">Sunset</option>
-                <option value="Taman">Taman</option>
-                <option value="Mangrove">Mangrove</option>
-                Alam, Bermain, Edukasi, Religi -->
               </select>
             </div>
 </div>
@@ -55,9 +61,14 @@
               <input type="text" name="latlng" class="form-control" id="latlng">
             </div>
 <div class="mb-2 kotak-input-user">
-              <label for="kec" class="col-form-label">Kec:</label>
-              <input type="text" name="kec" class="form-control" id="kec">
-            </div>
+    <label for="kec" class="col-form-label">Kecamatan:</label>
+    <select name="kec" id="kec" class="form-control" required>
+        <option value="" selected disabled>-- Pilih Kecamatan --</option>
+        <?php foreach ($kecamatan_sumenep as $kecamatan) : ?>
+            <option value="<?= htmlspecialchars($kecamatan) ?>"><?= htmlspecialchars($kecamatan) ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
 
 
 </div>

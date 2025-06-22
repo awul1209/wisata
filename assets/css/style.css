@@ -104,7 +104,7 @@ font-size: 22px;
 }
 #detail .kotak-petunjuk {
   /* margin-top: 20px; */
-  height: 770px;
+  height: auto;
   /* border: 1px solid black; */
   flex: 1;
   box-sizing: border-box;
@@ -121,7 +121,7 @@ font-size: 22px;
 
 #detail .kotak-peta {
   /* margin-top: 20px; */
-  height: 770px;
+  height: 870px;
   /* border: 1px solid black; */
   flex: 1;
   box-sizing: border-box;

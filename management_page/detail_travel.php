@@ -3,82 +3,54 @@
         $result = mysqli_query($koneksi, "SELECT * FROM travel WHERE id='$id'");
         $row = mysqli_fetch_assoc($result);
         $titles = $row['nama_travel'];
-
         $kontak = $row['kontak'];
         $alamat = $row['alamat'];
-
+        $gambar = $row['gambar'];
+        $area_layanan = $row['area_layanan'];
         $deskripsi_travel = $row['deskripsi_travel'];
-
-
         $title = "Detail dan Lokasi : " . $titles;
 
         // Pastikan latlng adalah format array atau decode jika berupa JSON string
         // $latlngArr = json_decode($latlng);  // Mengkonversi string JSON menjadi array
         ?>
 <div class="row col-11" id="detail-travel">
+   <div class="container py-4">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <img src="./assets/images/travel/<?= htmlspecialchars($gambar) ?>" class="img-fluid rounded shadow-sm" alt="Foto <?= htmlspecialchars($titles) ?>">
+                </div>
 
+                <div class="col-md-7">
+                    <h1 class="display-5 fw-bold"><?= htmlspecialchars($titles) ?></h1>
+                    
+                    <p class="fs-5 text-muted"><?= $deskripsi_travel ?></p>
+                    
+                    <hr class="my-4">
 
-    <div class="kotak-des">
-        <h6 class="h6 text-center">Deskripsi</h6>
-        <table class="table">
-            <tr>
-                <th>Item</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td>Nama Travel</td>
-                <td>
-                    <h6><?php echo $titles; ?></h6>
-                </td>
-            </tr>
-            <!-- <tr>
-                <td>Rute</td>
-                <td>
-                    <h6 class="text-justify"><?php echo $rute; ?></h6>
-                </td>
-            </tr>
-            <tr>
-                <td>Biaya Per-Orang</td>
-                <td>
-                    <h6 class="text-justify"><?php echo $tiket_org; ?></h6>
-                </td>
-            </tr>
-            <tr>
-                <td>Biaya Paket</td>
-                <td>
-                    <h6 class="text-justify"><?php echo $tiket_paket; ?></h6>
-                </td>
-            </tr> -->
-            <tr>
-                <td>Kontak</td>
-                <td>
-                    <h6 class="text-justify"><?php echo $kontak; ?></h6>
-                </td>
-            </tr>
-            <tr>
-                <td>Deskripsi</td>
-                <td>
-                    <h6 class="text-justify"><?php echo $deskripsi_travel; ?></h6>
-                </td>
-            </tr>
-            <tr>
-                <td>Alamat</td>
-                <td>
-                    <h6 class="text-justify"><?= $alamat; ?></h6>
-                </td>
-                
-            </tr>
-            <tr></tr>
+                    <p class="fs-6">
+                        <i class="fas fa-phone-alt me-2"></i> <strong>Kontak:</strong> <?= htmlspecialchars($kontak) ?>
+                    </p>
+                    <p class="fs-6">
+                        <i class="fas fa-map-marker-alt me-2"></i> <strong>Alamat:</strong> <?= $alamat ?>
+                    </p>
 
-            <!-- <tr>
-                <td colspan="2">
-                    <center>
-                    <div class="btn btn-success"><a href="?page=rute-travel&id=<?= $row['id']; ?>" class="text-decoration-none text-white">Rute</a></div>
-                    </center>
-                </td>
-            </tr> -->
-        </table>
+                    <div class="mt-4">
+                        <h5><i class="fas fa-route me-2"></i>Area Layanan:</h5>
+                        <?php
+                            // Pecah string area_layanan menjadi array
+                            $area_array = explode(',', $area_layanan);
+                            foreach ($area_array as $area) :
+                        ?>
+                            <span class="badge bg-secondary me-1 mb-1 p-2"><?= htmlspecialchars(trim($area)) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 
     <div class="kotak-peta">
