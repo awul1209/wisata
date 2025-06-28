@@ -103,19 +103,69 @@ $page = $_GET['page'];
 </head>
 
 <body >
+  
 
     <header>
         <?php include 'layout/navbar.php'; ?>
     </header>
     <main role="main">
+ 
         <!-- web dinamis -->
         <?php include 'page.php' ?>
     </main>
-    <footer>
-            <center>
-                <p>Copyright &copy; 2025 Skripsi Perencanaan Wisata</p>
-            </center>
-    </footer>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-column footer-about">
+            <h5>Skripsi Perencanaan Wisata</h5>
+            <p>Platform Anda untuk merencanakan petualangan tak terlupakan. Temukan destinasi, buat itinerary, dan wujudkan liburan impian Anda.</p>
+        </div>
+
+        <div class="footer-column footer-links">
+            <h5>Navigasi</h5>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+                <li><a href="#">Semua Destinasi</a></li>
+                <li><a href="#">Kontak</a></li>
+                <li><a href="#">Kebijakan Privasi</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column footer-contact">
+            <h5>Kontak Kami</h5>
+            <p><i class="icon-map-pin"></i> Jl. Pendidikan No. 123, Kota Ilmu, Indonesia</p>
+            <p><i class="icon-mail"></i> info@perencanaanwisata.com</p>
+            <p><i class="icon-phone"></i> (021) 123-4567</p>
+        </div>
+    </div>
+
+    <div class="footer-partners">
+        <h5>Bekerja Sama Dengan</h5>
+        <div class="partner-logos">
+            <a href="https://www.myzehotelsumenep.com/" target="_blank" title="Hotel Myze" style="background-color:#eaeaea;padding:5px">
+                <img src="https://manage.myzehotelsumenep.com/ImageData/System/logo.png" alt="Logo Hotel Murah">
+            </a>
+            <a href="https://www.traveloka.com/id-id?id=14221853873389010960&adloc=id-id&kw=traveloka&gmt=e&gn=g&gd=c&gdm=&gcid=705646680131&gdp=&gdt=&gap=&pc=1&cp=ID_TV_SM_AU_AL_Google+-+X+-+Search-ID/id+-+B+-+X+-+X_X+|+QueryType:Brand+Pure,MT:Exact_Traveloka+|+MT:Exact&aid=170276730131&wid=kwd-51659214310&fid=&gid=1007715&utm_id=CQrjwi8M&ad_id=705646680131&target_id=kwd-51659214310&click_id=Cj0KCQjwpf7CBhCfARIsANIETVoUt7oIlFT_Ey2qdkebqEFSXyjbJk3PIr04VipgWx4a1m-jzytvmgkaAncfEALw_wcB&group_id=170276730131&gad_source=1&gad_campaignid=21466334833&gbraid=0AAAAADi60UmGC6KHeEBHMmkxRHHNzFOsi&gclid=Cj0KCQjwpf7CBhCfARIsANIETVoUt7oIlFT_Ey2qdkebqEFSXyjbJk3PIr04VipgWx4a1m-jzytvmgkaAncfEALw_wcB" target="_blank" title="traveloka" style="background-color:#eaeaea;padding:5px" >
+                <img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v4.6.0/f/fbab4f587da2242fbe9858fe3e5ba717.svg" alt="Logo traveloka">
+            </a>
+            <a href="https://www.garuda-indonesia.com" target="_blank" title="garuda" style="background-color:#eaeaea;padding:5px" >
+                <img src="https://images.seeklogo.com/logo-png/28/1/garuda-indonesia-logo-png_seeklogo-283969.png" alt="Logo garuda">
+            </a>
+            <a href="https://www.pegipegi.com" target="_blank" title="PegiPegi">
+                <img src="https://i.imgur.com/wV2yZeX.png" alt="Logo PegiPegi">
+            </a>
+            </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p class="copyright-text">Copyright &copy; 2025 Skripsi Perencanaan Wisata. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="icon-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="icon-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="icon-instagram"></i></a>
+        </div>
+    </div>
+</footer>
 
 
     <!-- Modal Login -->

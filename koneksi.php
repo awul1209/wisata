@@ -8,7 +8,7 @@
 // $username = "if0_37978538";
 // $password = "ExoD4vRs0EHSD";
 // $database = "if0_37978538_wisata";
-$hostname = "localhost";
+$hostname = "127.0.0.1:3307";
 $username = "root";
 $password = "";
 $database = "wisata";

@@ -1,3 +1,4 @@
+<?php include 'layout/jumbotron.php' ?>
 <div class="kotak-tentang-kami">
     <div class="isi">
 <?php

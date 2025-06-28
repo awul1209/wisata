@@ -35,7 +35,7 @@ if (isset($_POST['cari'])) {
     $query_travel = mysqli_query($koneksi, "SELECT * FROM travel ORDER BY id DESC LIMIT $mulai_data, $data_per_halaman");
 }
 ?>
-
+     <?php include 'layout/jumbotron.php' ?>
 <form action="" method="post">
     <div class="search input-group mb-3">
        

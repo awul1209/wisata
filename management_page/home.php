@@ -1,46 +1,52 @@
 
 
-<div id="carouselExampleAutoplaying" class="carousel slide kotak-carousel" data-bs-ride="carousel">
-<div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/images/konten/b1.png" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-        <h5 class="fs-1">Nikmati Keindahan Pantai</h5>
-        <p class="fs-4">Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="assets/images/konten/b2.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5 class="fs-1">Nikmati Keindahan Pantai</h5>
-        <p class="fs-4">Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="assets/images/konten/b3.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5 class="fs-1">Nikmati Keindahan Pantai</h5>
-        <p class="fs-4">Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>
+<?php include 'layout/jumbotron.php' ?>
 
 <div class="top-destination">
+  <div class="iklan-kiri">
+   <a href="https://www.myzehotelsumenep.com/" target="_blank" class="ad-link-wrapper">
+  <div class="ad-container">
+    <center>
+      <img src="https://manage.myzehotelsumenep.com/ImageData/Travel_guide/MA25020004/images-0.jpg" alt="Promo Paket Wisata" class="ad-image" style="width: 160px; height: 100px;">
+    </center>
+    <div class="ad-content">
+      <h4 class="ad-title">Hotel Myze Sumenep</h4>
+      <p class="ad-description">Booking Kamar Mulai dari 100 Ribu Per Hari</p>
+      <span class="ad-cta-button">Lihat Detail</span>
+    </div>
+  </div>
+  <div class="ad-container">
+    <img src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sewa Mobil" class="ad-image" style="width: 160px; height:100px;">
+    <div class="ad-content">
+      <h4 class="ad-title">Sewa Mobil Hemat</h4>
+      <p class="ad-description">Lepas Kunci & Dengan Sopir. Armada Terbaru, Bersih, dan Terawat.</p>
+      <span class="ad-cta-button">Cek Harga</span>
+    </div>
+  </div>
+</a>
+  </div>
+  <div class="iklan-kanan">
+    <a href="#" class="ad-link-wrapper">
+  <div class="ad-container">
+    <img src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sewa Mobil" class="ad-image" style="width: 160px; height:100px;">
+    <div class="ad-content">
+      <h4 class="ad-title">Sewa Mobil Hemat</h4>
+      <p class="ad-description">Lepas Kunci & Dengan Sopir. Armada Terbaru, Bersih, dan Terawat.</p>
+      <span class="ad-cta-button">Cek Harga</span>
+    </div>
+  </div>
+    <div class="ad-container">
+    <center>
+      <img src="https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Promo Paket Wisata" class="ad-image" style="width: 160px; height: 100px;">
+    </center>
+    <div class="ad-content">
+      <h4 class="ad-title">Liburan ke Raja Ampat</h4>
+      <p class="ad-description">4 Hari 3 Malam, Termasuk Snorkeling & Penginapan. Mulai dari Rp 3 Jt!</p>
+      <span class="ad-cta-button">Lihat Detail</span>
+    </div>
+  </div>
+</a>
+  </div>
   <div class="judul-destination">
     <h2 class="judul-kategori">Kategori Wisata</h2>
     <div class="kategori-container">
@@ -61,8 +67,21 @@
   </div>
 </div>
 
+<section class="welcome-section">
+  <div class="welcome-overlay"></div>
+  
+  <div class="welcome-container">
+    <h2>Selamat Datang di Website Wisata Kabupaten Sumenep</h2>
+    <p>
+      Temukan pesona keindahan tersembunyi dan destinasi populer di seluruh Sumenep. 
+      Kami siap membantu Anda merencanakan petualangan tak terlupakan.
+    </p>
+    <a href="?page=wisata" class="cta-button">Jelajahi Sekarang</a>
+  </div>
+</section>
+
 <div class="map-kotak">
-<h2 id="judul-map">Destinasi Terdekat</h2>
+<h2 class="mt-5" id="judul-map">Destinasi Terdekat</h2>
 <hr>
 </div>
     <div id="mymap" class="kotak-map"></div>
@@ -146,6 +165,8 @@
     filterWisata('');
   };
 </script>
+
+<!-- iklan -->
 
 
 

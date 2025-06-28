@@ -4,6 +4,7 @@
     border: 1px solid rgb(201, 198, 198);
 margin: auto;
 margin-bottom: 70px;
+z-index: 1;
 }
 
 .map-kotak #judul-map{

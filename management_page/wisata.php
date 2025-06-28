@@ -33,7 +33,7 @@ if (isset($_POST['cari'])) {
     $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id GROUP BY wisata.id ORDER BY id DESC LIMIT $mulai_data, $data_per_halaman");
 }
 ?>
-
+     <?php include 'layout/jumbotron.php' ?>
 <form action="" method="post">
     <div class="search input-group mb-3">
         <div>

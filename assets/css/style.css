@@ -1,3 +1,5 @@
+
+
 /* kotak home konten */
 #carouselExampleAutoplaying{
   margin-top: 60px;
@@ -14,6 +16,43 @@
   height: auto;
   margin-bottom: 75px;
 }
+/* iklan */
+.iklan-kiri{
+  height: 100%;
+  width: 165px;
+  /* border: 1px solid rgb(10, 6, 6); */
+  position: absolute;
+  
+}
+.iklan-kanan{
+  height: 100%;
+  width: 165px;
+  /* border: 1px solid black; */
+  position: absolute;
+  right: 0px;
+}
+
+.ad-link-wrapper {
+  text-decoration: none;
+  color: inherit;
+}
+.top-destination .ad-content h4{
+  font-size: 15px;
+}
+.top-destination .ad-content p,span{
+  font-size: 14px;
+}
+.ad-cta-button {
+  display: inline-block;
+  background-color: #0d6efd;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+/* end iklan */
 .top-destination hr{
   margin: 0px;
   width: 20%;
@@ -52,7 +91,7 @@ font-size: 22px;
 
 /* kategori */
 .kategori-container {
-  margin-top: 5px;
+  margin-top: 25px;
   display: flex;
   overflow-x: auto; /* Membuat kategori dapat digeser secara horizontal */
   padding: 10px 10px; /* Menambahkan padding atas dan bawah */
@@ -91,6 +130,98 @@ font-size: 22px;
 }
 /* kategori */
 /* end destination */
+
+/* selamat datang */
+/* ================================== */
+/* STYLING BAGIAN SELAMAT DATANG     */
+/* ================================== */
+
+.welcome-section {
+  /* GANTI URL GAMBAR INI DENGAN GAMBAR ANDA SENDIRI */
+  background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1470');
+  background-size: cover;      /* Membuat gambar menutupi seluruh area */
+  background-position: center; /* Posisi gambar di tengah */
+  background-attachment: fixed;/* Efek parallax saat scroll */
+  padding: 100px 20px;         /* Jarak atas-bawah dan kiri-kanan */
+  position: relative;          /* Diperlukan untuk lapisan overlay */
+  text-align: center;
+  color: #ffffff;              /* Warna teks utama (putih) */
+}
+
+/* Lapisan overlay gelap */
+.welcome-section .welcome-overlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Hitam dengan 50% transparansi */
+  z-index: 1;
+}
+
+/* Kontainer untuk konten agar berada di atas overlay */
+.welcome-section .welcome-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px; /* Lebar maksimal konten */
+  margin: 0 auto;   /* Posisikan di tengah */
+}
+
+.welcome-section h2 {
+  font-size: 2.8rem; /* Ukuran font judul */
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 1.2rem;  /* Ukuran font paragraf */
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.welcome-section .cta-button {
+  display: inline-block;
+  background-color: #3498db; /* Warna biru yang mirip dengan tombol "Lihat" Anda */
+  color: #ffffff;
+  padding: 14px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.welcome-section .cta-button:hover {
+  background-color: #2980b9; /* Warna biru sedikit lebih gelap saat hover */
+  transform: translateY(-2px); /* Efek sedikit terangkat saat hover */
+}
+
+
+/* ================================== */
+/* STYLING RESPONSIVE         */
+/* (Untuk Tampilan di HP)        */
+/* ================================== */
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 80px 15px; /* Kurangi padding di layar kecil */
+    background-attachment: scroll; /* Hapus efek parallax di mobile untuk performa */
+  }
+
+  .welcome-section h2 {
+    font-size: 2.2rem; /* Kecilkan ukuran judul di HP */
+  }
+
+  .welcome-section p {
+    font-size: 1rem; /* Kecilkan ukuran paragraf di HP */
+  }
+
+  .welcome-section .cta-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+}
+/* end selamat datang */
 
 /* css detail */
 #detail {
@@ -347,13 +478,182 @@ font-size: 13px;
 /* end wisata */
 
 /* footer */
-.footer{
-  background-color: rgb(20, 20, 20);
-  height: 10px;
+/* ======================================================= */
+/* KODE CSS BARU UNTUK FOOTER (TAMPILAN CERAH)      */
+/* (Hapus semua CSS footer lama dan ganti dengan ini)    */
+/* ======================================================= */
+
+/* --- Gaya Utama Footer --- */
+.site-footer {
+    background-color: #f8f9fa; /* Perubahan: Latar belakang terang */
+    padding: 45px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    color: #555; /* Perubahan: Warna teks utama lebih gelap */
+    border-top: 1px solid #e9ecef; /* Garis pemisah dari konten utama */
 }
-.footer p{
-  color: aliceblue;
+
+.footer-container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
+
+.footer-column {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+/* Mengatur lebar kolom untuk layar desktop */
+@media (min-width: 992px) {
+    .footer-column {
+        width: auto;
+    }
+    .footer-about {
+        width: 40%;
+    }
+    .footer-links, .footer-contact {
+        width: 25%;
+    }
+}
+
+.site-footer h5 {
+    color: #111; /* Perubahan: Warna judul lebih gelap */
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.site-footer a {
+    color: #555; /* Perubahan: Warna link lebih gelap */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #0d6efd; /* Warna biru saat disentuh mouse */
+}
+
+/* --- Kolom Link & Kontak --- */
+.footer-links ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-contact p i {
+    margin-right: 10px;
+    font-style: normal;
+    color: #0d6efd; /* Memberi warna pada ikon kontak */
+}
+
+/* --- Bagian Mitra Kerja Sama --- */
+.footer-partners {
+    text-align: center;
+    padding: 30px 0;
+    /* Perubahan: Hapus border, beri latar belakang sedikit berbeda untuk section */
+    background-color: #fff; 
+    margin: 20px 0;
+}
+
+.partner-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px; /* Jarak antar logo diperbesar sedikit */
+    margin-top: 20px;
+}
+
+.partner-logos a {
+    display: inline-block;
+}
+
+.partner-logos img {
+    max-height: 55px; /* Sedikit diperbesar agar lebih jelas */
+    filter: grayscale(100%); /* Efek abu-abu agar seragam */
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* Efek saat logo disentuh mouse */
+.partner-logos img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+
+/* --- Bagian Bawah Footer (Copyright & Social) --- */
+.footer-bottom {
+    padding: 20px 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid #e9ecef; /* Garis pemisah */
+}
+
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1170px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+}
+
+.copyright-text {
+    margin: 0 0 15px 0;
+    color: #6c757d;
+}
+
+@media (min-width: 768px) {
+    .copyright-text {
+        margin: 0;
+    }
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef; /* Perubahan: Latar belakang ikon terang */
+    color: #555; /* Perubahan: Warna ikon gelap */
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #0d6efd; /* Warna biru saat hover */
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* --- Ikon Sederhana (opsional) --- */
+/* Anda bisa menggunakan library ikon, ini hanya contoh */
+.icon-map-pin::before { content: '📍'; }
+.icon-mail::before { content: '✉️'; }
+.icon-phone::before { content: '📞'; }
+.icon-facebook::before { content: 'f'; font-weight: bold; }
+.icon-twitter::before { content: 't'; font-weight: bold; }
+.icon-instagram::before { content: 'i'; font-weight: bold; }
 /* end footer */
 
 @media (max-width: 420px) {
@@ -530,12 +830,6 @@ display: flex;
     width: 325px;
     /* margin-left: 25px; */
   }
-
-  /* pganation */
-  /* #kotak-pagination{
-    border: 1px solid black;
-    margin: auto;
-  } */
   /* end wisata */
 
   /* destination */

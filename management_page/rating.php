@@ -59,6 +59,7 @@ $ulasan_total = buatUlasan(round($rata_rata_combined)); // Ulasan total berdasar
 ?>
 
 <script src="assets/js/alert.js"></script>
+     <?php include 'layout/jumbotron.php' ?>
 <div class="kotak-rating">
 <?php if (!isset($s_nama)) { ?>
     <h3>Welcome back, Pengunjung</h3>
