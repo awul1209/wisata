@@ -17,12 +17,30 @@
   margin-bottom: 75px;
 }
 /* iklan */
-.iklan-kiri{
+.iklan-kiri {
   height: 100%;
   width: 165px;
-  /* border: 1px solid rgb(10, 6, 6); */
   position: absolute;
+
+  /* === PERBAIKAN BOX-SHADOW === */
+  /* Bayangan dibuat lebih lembut, lebih jauh, dan semi-transparan untuk efek 3D modern */
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
   
+  /* === PERSIAPAN UNTUK HOVER === */
+  /* Menambahkan transisi agar perubahan ukuran dan bayangan menjadi halus (tidak patah-patah) */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFEK SAAT MOUSE DI ATASNYA (HOVER) */
+.iklan-kiri:hover {
+  /* Membuat ukuran elemen membesar 1.2x dari ukuran aslinya */
+  transform: scale(1.05);
+  
+  /* Bayangan dibuat lebih kuat untuk mempertegas efek "terangkat" */
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
+
+  /* Menjaga iklan agar tetap di lapisan paling atas saat membesar */
+  z-index: 10; 
 }
 .iklan-kanan{
   height: 100%;
@@ -30,6 +48,24 @@
   /* border: 1px solid black; */
   position: absolute;
   right: 0px;
+    /* === PERBAIKAN BOX-SHADOW === */
+  /* Bayangan dibuat lebih lembut, lebih jauh, dan semi-transparan untuk efek 3D modern */
+  box-shadow: -0px -10px -25px rgba(0, 0, 0, 0.1);
+  
+  /* === PERSIAPAN UNTUK HOVER === */
+  /* Menambahkan transisi agar perubahan ukuran dan bayangan menjadi halus (tidak patah-patah) */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* EFEK SAAT MOUSE DI ATASNYA (HOVER) */
+.iklan-kanan:hover {
+  /* Membuat ukuran elemen membesar 1.2x dari ukuran aslinya */
+  transform: scale(1.05);
+  
+  /* Bayangan dibuat lebih kuat untuk mempertegas efek "terangkat" */
+  box-shadow: 0px -15px -40px rgba(0, 0, 0, 0.2);
+
+  /* Menjaga iklan agar tetap di lapisan paling atas saat membesar */
+  z-index: 10; 
 }
 
 .ad-link-wrapper {
