@@ -13,11 +13,13 @@ $mulai_data = ($halaman_saat_ini - 1) * $data_per_halaman;
 if (isset($_POST['cari'])) {
     $kec = $_POST['kec'];
     $wisata = $_POST['wisata'];
+    $kategori = $_POST['kategori'];
 
     $kec = mysqli_real_escape_string($koneksi, $kec);
     $wisata = mysqli_real_escape_string($koneksi, $wisata);
+    $kategori = mysqli_real_escape_string($koneksi, $kategori);
 
-    $query_wisata = "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id WHERE 1=1 "; // Inisialisasi query
+    $query_wisata = "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id WHERE 1=1 and wisata.status='aktif' "; // Inisialisasi query
 
     if (!empty($kec)) {
         $query_wisata .= "AND kec='$kec' ";
@@ -25,12 +27,15 @@ if (isset($_POST['cari'])) {
     if (!empty($wisata)) {
         $query_wisata .= "AND nama_wisata LIKE '%$wisata%' ";
     }
+    if (!empty($kategori)) {
+        $query_wisata .= "AND kategori LIKE '%$kategori%' ";
+    }
 
     $query_wisata .= "GROUP BY wisata.id ORDER BY wisata.id DESC LIMIT $mulai_data, $data_per_halaman"; // Tambahkan LIMIT untuk pagination
 
     $query_wisata = mysqli_query($koneksi, $query_wisata);
 } else {
-    $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id GROUP BY wisata.id ORDER BY id DESC LIMIT $mulai_data, $data_per_halaman");
+    $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id where wisata.status='aktif' GROUP BY wisata.id ORDER BY id DESC LIMIT $mulai_data, $data_per_halaman");
 }
 ?>
      <?php include 'layout/jumbotron.php' ?>
@@ -43,6 +48,16 @@ if (isset($_POST['cari'])) {
                 $query_kecamatan = mysqli_query($koneksi, "SELECT DISTINCT kec FROM wisata");
                 while ($row = mysqli_fetch_assoc($query_kecamatan)) { ?>
                     <option value="<?= $row['kec'] ?>"><?= $row['kec'] ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div>
+            <select class="form-select search-combo" name="kategori" id="kategori" aria-label="Default select example">
+                <option value="" selected>Kategori.</option>
+                <?php
+                $query_kecamatan = mysqli_query($koneksi, "SELECT DISTINCT kategori FROM wisata");
+                while ($row = mysqli_fetch_assoc($query_kecamatan)) { ?>
+                    <option value="<?= $row['kategori'] ?>"><?= $row['kategori'] ?></option>
                 <?php } ?>
             </select>
         </div>

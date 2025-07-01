@@ -5,9 +5,9 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
 
 // Query berdasarkan kategori
 if ($kategori) {
-  $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id WHERE kategori='$kategori' GROUP BY wisata.id ORDER BY wisata_id DESC LIMIT 4");
+  $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id WHERE kategori='$kategori' GROUP BY wisata.id ORDER BY wisata.id DESC LIMIT 4");
 } else {
-  $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id GROUP BY wisata.id ORDER BY wisata_id DESC LIMIT 4");
+  $query_wisata = mysqli_query($koneksi, "SELECT wisata.id,nama_wisata,kec,wisata.gambar,  FORMAT(SUM(rating) / COUNT(komentar.id), 1) as rating  FROM wisata LEFT JOIN komentar ON wisata.id=komentar.wisata_id GROUP BY wisata.id ORDER BY wisata.id DESC LIMIT 4");
 }
 
 

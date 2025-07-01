@@ -18,6 +18,7 @@
 }
 /* iklan */
 .iklan-kiri {
+  /* display: none; */
   height: 100%;
   width: 165px;
   position: absolute;
@@ -43,6 +44,7 @@
   z-index: 10; 
 }
 .iklan-kanan{
+  /* display: none; */
   height: 100%;
   width: 165px;
   /* border: 1px solid black; */
@@ -465,16 +467,18 @@ font-size: 13px;
 /* wisata */
 /* search */
 .search {
-  width: 900px;
+  max-width: 2000px;
   margin: auto;
   margin-top: 90px;
   display: flex;
   justify-content: center;
   /* border: 1px solid black; */
 }
-#kab-pc{
+#kategori{
   width: 250px;
-  /* display: none; */
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
   /* margin-right: 3px; */
 }
 #kec-pc{
@@ -482,9 +486,10 @@ font-size: 13px;
   width: 250px;
   margin-right: 5px;
   margin-left: 5px;
+  margin-bottom: 5px;
 }
 .cari{
-  width: 350px;
+  width: 250px;
   /* margin-left: 25px; */
 }
 /* end search */
