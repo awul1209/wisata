@@ -474,22 +474,16 @@ font-size: 13px;
   justify-content: center;
   /* border: 1px solid black; */
 }
-#kategori{
-  width: 250px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-  /* margin-right: 3px; */
-}
+
 #kec-pc{
   /* display: none; */
-  width: 250px;
+  width: 350px;
   margin-right: 5px;
   margin-left: 5px;
   margin-bottom: 5px;
 }
 .cari{
-  width: 250px;
+  width: 350px;
   /* margin-left: 25px; */
 }
 /* end search */
